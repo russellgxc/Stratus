@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Duration controlled by <SmoothScroll /> (40% slower than native feel) */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-brand-white font-sans text-brand-dark antialiased;
+  }
+}
+
+@layer components {
+  /**
+   * Underline draws left → right on hover, retracts right → left on leave.
+   * transform-origin stays on the left so enter/leave are true reverses.
+   */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+    text-decoration: none;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    /* Leave / outro — slightly slower */
+    transition: transform 0.4s ease-in-out;
+    pointer-events: none;
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after,
+  .group:hover .link-underline::after,
+  .group:focus-visible .link-underline::after {
+    transform: scaleX(1);
+    /* Enter / intro — slightly faster */
+    transition-duration: 0.25s;
+  }
+
+  @keyframes insight-filter-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .insight-filter-in {
+    animation: insight-filter-in 0.45s ease-in-out both;
+  }
+
+  /**
+   * Viewport lazy fade-up — toggled by <FadeIn /> via .reveal-in--visible
+   */
+  .reveal-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s ease-in-out,
+      transform 0.7s ease-in-out;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal-in--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .insight-filter-in {
+      animation: none;
+    }
+
+    .reveal-in {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /**
+   * Hero enter stagger — arc, then copy, then illustration.
+   */
+  @keyframes hero-arc-in {
+    from {
+      opacity: 0;
+      transform: scale(0.86);
+    }
+    to {
+      opacity: 0.06;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes hero-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-fade-opacity {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .hero-arc {
+    transform-origin: bottom right;
+    animation: hero-arc-in 1.15s cubic-bezier(0.16, 0.84, 0.32, 1) both;
+  }
+
+  .hero-copy {
+    animation: hero-fade-in 0.7s ease-in-out 0.35s both;
+  }
+
+  .hero-image {
+    animation: hero-fade-opacity 0.7s ease-in-out 1s both;
+  }
+
+  @keyframes page-header-arc-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.06;
+    }
+  }
+
+  .page-header-arc {
+    animation: page-header-arc-in 0.5s ease-in-out 0.5s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-arc {
+      animation: none;
+      opacity: 0.06;
+      transform: none;
+    }
+
+    .hero-copy,
+    .hero-image {
+      animation: none;
+    }
+
+    .page-header-arc {
+      animation: none;
+      opacity: 0.06;
+    }
+  }
+
+  /** Shared page section shell — heights + snap controlled by breakpoints below */
+  .site-section {
+    position: relative;
+    width: 100%;
+  }
+}
+
+/* ≥1920: all sections at least 1250px tall */
+@media (min-width: 1920px) {
+  .site-section {
+    min-height: 1250px;
+  }
+
+  .site-section--hero {
+    min-height: max(1250px, 100svh);
+  }
+}
+
+/*
+ * <1920: viewport-tall sections + scroll snap.
+ * Non-hero sections fill the screen; hero keeps its own full-viewport layout.
+ */
+@media (max-width: 1919.98px) {
+  html:has(.site-section) {
+    scroll-snap-type: y mandatory;
+  }
+
+  .site-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .site-section:not(.site-section--hero) {
+    height: 100svh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .site-section--hero {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  /* Subscribe + footer as one trailing snap unit so they remain reachable
+     even when shorter than the viewport. */
+  .site-page-end {
+    min-height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+  }
+
+  .site-page-end footer {
+    scroll-snap-align: end;
+    scroll-snap-stop: normal;
+  }
+}
