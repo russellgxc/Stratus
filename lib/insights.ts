@@ -26,7 +26,7 @@ export type InsightItem = {
 export const insights: InsightItem[] = [
   {
     id: "trust",
-    title: "Trust is a lagging indicator until it isn't anymore",
+    title: "Trust looks solid until the moment it quietly collapses",
     category: "Pop & Politics",
     href: "/insight/trust-lagging-indicator",
     image: "/insight-1.png",
@@ -34,7 +34,7 @@ export const insights: InsightItem[] = [
   },
   {
     id: "syria",
-    title: "The humanitarian paradox in Syria",
+    title: "Aid still collides with conflict inside Syria's humanitarian paradox",
     category: "Environment",
     href: "/insight/humanitarian-paradox-syria",
     image: "/insight-2.png",
@@ -42,7 +42,7 @@ export const insights: InsightItem[] = [
   },
   {
     id: "france-nuclear",
-    title: "France Shuts Off More Nuclear Power as Heat Builds",
+    title: "France is shutting more nuclear plants as heat rises",
     category: "Industry Alerts",
     href: "/insight/france-nuclear-heat",
     image: "/insight-3.png",
@@ -50,7 +50,7 @@ export const insights: InsightItem[] = [
   },
   {
     id: "syria-b",
-    title: "The humanitarian paradox in Syria",
+    title: "Aid still collides with conflict inside Syria's humanitarian paradox",
     category: "Environment",
     href: "/insight/humanitarian-paradox-syria",
     image: "/insight-4.png",
@@ -58,17 +58,16 @@ export const insights: InsightItem[] = [
   },
   {
     id: "ed-sheeran",
-    title:
-      "Ed Sheeran inspires government-backed 'music in libraries' scheme",
+    title: "Ed Sheeran inspires new government-backed music in libraries scheme",
     category: "Pop & Politics",
     href: "/insight/music-in-libraries",
-    image: "/insight-5.png",
+    image: "/insight-ed-sheeran.jpg",
     imageAlt: "Portrait of a man outdoors",
   },
   {
     id: "france-nuclear-b",
-    title: "France Shuts Off More Nuclear Power as Heat Builds",
-    category: "Industry Alerts",
+    title: "Cities feel the heat as nuclear plants go offline",
+    category: "News",
     href: "/insight/france-nuclear-heat",
     image: "/insight-6.png",
     imageAlt: "City skyline at sunset",
