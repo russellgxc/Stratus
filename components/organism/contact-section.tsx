@@ -124,8 +124,8 @@ export function ContactSection() {
 
           <HalfPageCard
             variant="contact"
-            label="Our Mission"
-            title="We’re here to help organizations navigate complexity."
+            label="Lorem ipsum"
+            title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             className="lg:ml-auto lg:max-w-[710px]"
           />
         </div>

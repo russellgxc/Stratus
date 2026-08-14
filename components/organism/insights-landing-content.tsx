@@ -22,8 +22,12 @@ const filters: { id: FilterId; label: string }[] = [
   })),
 ];
 
-export function InsightsLandingContent() {
-  const [active, setActive] = useState<FilterId>("all");
+export function InsightsLandingContent({
+  initialCategory,
+}: {
+  initialCategory?: InsightCategory;
+}) {
+  const [active, setActive] = useState<FilterId>(initialCategory ?? "all");
 
   const visible = useMemo(() => {
     if (active === "all") return insights;

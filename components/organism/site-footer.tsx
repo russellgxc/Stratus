@@ -11,7 +11,7 @@ const companyLinks = [
 
 const resourceLinks = [
   { href: "/#insight", label: "Insights" },
-  { href: "/insight", label: "Pop & Politics" },
+  { href: "/insight?category=pop-politics", label: "Pop & Politics" },
   { href: "/#subscribe", label: "Subscribe" },
 ] as const;
 

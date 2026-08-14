@@ -43,9 +43,8 @@ export function AboutPageContent() {
                 variant="body"
                 className="mt-[53px] max-w-[328px] text-lg leading-5 text-brand-black"
               >
-                Their team of experts brings a wealth of experience and a fresh
-                perspective, ensuring that clients are equipped to thrive in a
-                competitive landscape.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                varius tempus metus sed viverra.
               </Typography>
 
               <Link

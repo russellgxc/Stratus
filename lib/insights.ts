@@ -14,6 +14,22 @@ export const insightCategoryDotClass: Record<InsightCategory, string> = {
   Environment: "bg-brand-green",
 };
 
+export const insightCategorySlug: Record<InsightCategory, string> = {
+  "Pop & Politics": "pop-politics",
+  "Industry Alerts": "industry-alerts",
+  News: "news",
+  Environment: "environment",
+};
+
+export function insightCategoryFromSlug(
+  slug: string | undefined,
+): InsightCategory | undefined {
+  if (!slug) return undefined;
+  return insightCategories.find(
+    (category) => insightCategorySlug[category] === slug,
+  );
+}
+
 export type InsightItem = {
   id: string;
   title: string;
