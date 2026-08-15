@@ -53,7 +53,7 @@ export function InsightsLandingContent({
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActive(filter.id)}
-                className="inline-flex items-center gap-[10px] font-sans text-xl font-normal leading-[25.9px] text-brand-black"
+                className="inline-flex items-center gap-[10px] font-sans text-lg font-normal leading-5 text-brand-black"
               >
                 {showDot ? (
                   <span

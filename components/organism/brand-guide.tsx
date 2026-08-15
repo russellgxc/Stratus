@@ -362,7 +362,7 @@ export function BrandGuide() {
                 {categoryDots.map((dot) => (
                   <li
                     key={dot.label}
-                    className="inline-flex items-center gap-[10px] font-sans text-xl leading-[25.9px]"
+                    className="inline-flex items-center gap-[10px] font-sans text-lg font-normal leading-5"
                   >
                     <span
                       aria-hidden

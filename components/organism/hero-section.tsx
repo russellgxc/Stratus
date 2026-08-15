@@ -43,14 +43,14 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-image relative flex min-h-0 items-center self-center">
-          <div className="relative aspect-[696/486] w-full overflow-hidden rounded-tl-[clamp(4rem,14vw,12.5rem)]">
+        <div className="hero-image relative flex min-h-0 w-full items-center self-center lg:justify-end">
+          <div className="relative aspect-[696/486] w-full max-w-[700px] overflow-hidden rounded-tl-[clamp(4rem,14vw,12.5rem)]">
             <Image
               src="/hero-illustration.png"
               alt="Collage of people, places, and communities Stratus works with"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, min(900px, 50vw)"
+              sizes="(max-width: 1024px) 100vw, 700px"
               className="object-cover object-center"
             />
           </div>
