@@ -10,9 +10,9 @@ const companyLinks = [
 ] as const;
 
 const resourceLinks = [
-  { href: "/#insight", label: "Insights" },
+  { href: "/insight", label: "Insights" },
   { href: "/insight?category=pop-politics", label: "Pop & Politics" },
-  { href: "/#subscribe", label: "Subscribe" },
+  { href: "/insight?category=industry-alerts", label: "Industry Alerts" },
 ] as const;
 
 const socialLinks = [
@@ -104,16 +104,23 @@ export function SiteFooter({ className }: SiteFooterProps) {
     <footer className={cn("bg-brand-black text-brand-white", className)}>
       <Container className="flex flex-col justify-center py-14 lg:min-h-[493px] lg:py-16">
         <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
-          <div className="flex flex-col gap-[18px] sm:col-span-2 lg:col-span-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/footer-logo-mark.svg"
-              alt=""
-              width={79}
-              height={79}
-              className="size-[79px]"
-            />
+          <div className="flex flex-col sm:col-span-2 lg:col-span-1">
+            <Link
+              href="/#hero"
+              aria-label="Stratus Strategies home"
+              className="mb-10 inline-flex w-fit"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/footer-logo-mark.svg"
+                alt=""
+                width={79}
+                height={79}
+                className="size-[79px]"
+              />
+            </Link>
 
+            <div className="flex flex-1 flex-col gap-[18px]">
             <p className="font-sans text-lg font-normal leading-normal tracking-[-0.02em] text-[#dfdfdf]">
               Stratus Strategies
               <br />
@@ -137,6 +144,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <p className="mt-auto pt-10 font-sans text-xs font-normal tracking-[-0.02em] text-brand-white opacity-40 lg:pt-20">
               © {new Date().getFullYear()} All rights reserved.
             </p>
+            </div>
           </div>
 
           <div>

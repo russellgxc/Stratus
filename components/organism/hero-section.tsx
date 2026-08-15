@@ -6,7 +6,10 @@ import { Typography } from "@/components/ui/typography";
 
 export function HeroSection() {
   return (
-    <section className="site-section site-section--hero relative flex flex-col overflow-hidden bg-brand-blue text-brand-white">
+    <section
+      id="hero"
+      className="site-section site-section--hero relative flex flex-col overflow-hidden bg-brand-blue text-brand-white"
+    >
       {/* Brand arc — Figma 350:1964 within 1920×1084 hero */}
       <div
         aria-hidden
