@@ -1,11 +1,16 @@
 "use client";
 
 import type { FormEvent } from "react";
+import { usePathname } from "next/navigation";
 
 import { CircleArrow } from "@/components/ui/circle-arrow";
 import { Typography } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 
 export function EmailSection() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
@@ -13,7 +18,10 @@ export function EmailSection() {
   return (
     <section
       id="subscribe"
-      className="bg-brand-gold text-brand-black"
+      className={cn(
+        "text-brand-black",
+        isHome ? "bg-brand-white" : "bg-brand-muted",
+      )}
       aria-labelledby="subscribe-heading"
     >
       {/*
