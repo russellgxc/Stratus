@@ -124,20 +124,24 @@ export function BrandGuide() {
             </div>
           </div>
 
-          <a
-            href="https://fonts.google.com/share?selection.family=Inter|Noto+Serif+Display"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 self-start text-brand-black"
-          >
-            <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
-              Download fonts
-            </span>
-            <ArrowDown
-              aria-hidden
-              className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
-            />
-          </a>
+          <div className="flex max-w-[640px] flex-col gap-3">
+            <a
+              href="/Stratus_Fonts.zip"
+              download="Stratus_Fonts.zip"
+              className="group inline-flex items-center gap-3 self-start text-brand-black"
+            >
+              <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
+                Download fonts
+              </span>
+              <ArrowDown
+                aria-hidden
+                className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
+              />
+            </a>
+            <Typography variant="body" className="text-sm leading-5 text-black/40">
+              The zip includes Inter Regular and Noto Serif Display Regular.
+            </Typography>
+          </div>
         </Container>
       </section>
 
