@@ -58,7 +58,7 @@ export function AboutSection() {
             <TextLink
               href="/about"
               arrow="right"
-              className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
+              className="hidden text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black lg:inline-flex"
             >
               More about us
             </TextLink>
@@ -83,6 +83,14 @@ export function AboutSection() {
             </div>
 
             <Accordion items={[...aboutAccordionItems]} className="mt-4 w-full" />
+
+            <TextLink
+              href="/about"
+              arrow="right"
+              className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black lg:hidden"
+            >
+              More about us
+            </TextLink>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,7 @@ export type HalfPageCardProps = {
    * contact = Property 1=contact (office details, no CTA)
    */
   variant?: "muted" | "blue" | "contact";
+  arrow?: "right" | "down";
   className?: string;
 };
 
@@ -58,6 +59,7 @@ export function HalfPageCard({
   cta,
   href = "#",
   variant = "muted",
+  arrow = "right",
   className,
 }: HalfPageCardProps) {
   const isBlue = variant === "blue";
@@ -137,13 +139,23 @@ export function HalfPageCard({
         <span className="link-underline font-sans text-xl font-normal leading-[44.6px] tracking-[-0.02em]">
           {cta}
         </span>
-        <ArrowRight
-          aria-hidden
-          className={cn(
-            "size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out",
-            "motion-safe:group-hover:translate-x-2",
-          )}
-        />
+        {arrow === "down" ? (
+          <ArrowDown
+            aria-hidden
+            className={cn(
+              "size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out",
+              "motion-safe:group-hover:translate-y-2",
+            )}
+          />
+        ) : (
+          <ArrowRight
+            aria-hidden
+            className={cn(
+              "size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out",
+              "motion-safe:group-hover:translate-x-2",
+            )}
+          />
+        )}
       </div>
     </>
   );

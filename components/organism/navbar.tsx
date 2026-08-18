@@ -92,7 +92,7 @@ export function Navbar({ className }: NavbarProps) {
             height={40}
             className={cn(
               "shrink-0 transition-[width,height] duration-300 ease-in-out",
-              compact ? "size-10" : "size-10 max-md:size-9",
+              "size-12 md:size-10",
             )}
           />
 
@@ -174,7 +174,7 @@ export function Navbar({ className }: NavbarProps) {
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
-                      "link-underline block py-3 font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-white",
+                      "link-underline inline-block py-3 font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-white",
                       isActive && "link-underline-active",
                     )}
                     onClick={() => setMenuOpen(false)}

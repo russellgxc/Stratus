@@ -24,7 +24,7 @@ export function AboutPageContent() {
         aria-labelledby="about-intro-heading"
       >
         <Container>
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-[112px]">
+          <div className="flex flex-col-reverse gap-12 lg:flex-row lg:items-start lg:gap-[112px]">
             <FadeIn
               className="flex w-full max-w-[632px] shrink-0 flex-col"
               delay={0}
@@ -222,6 +222,7 @@ export function AboutPageContent() {
                 title="To help organizations navigate complexity and strengthen reputation."
                 cta="Download report"
                 href="#"
+                arrow="down"
                 className="lg:max-w-none"
               />
             </FadeIn>

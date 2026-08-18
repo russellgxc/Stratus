@@ -25,7 +25,7 @@ export function HeroSection({
       {/* Brand arc — Figma 350:1964 within 1920×1084 hero */}
       <div
         aria-hidden
-        className="hero-arc pointer-events-none absolute bottom-0 left-[27.4%] right-0 top-[7.8%] z-0"
+        className="hero-arc pointer-events-none absolute bottom-0 left-[27.4%] right-0 top-[7.8%] z-0 max-md:left-[-35%] max-md:right-[-20%] max-md:top-[-20%]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

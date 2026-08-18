@@ -40,7 +40,11 @@ export function InsightsLandingContent({
     <section className="bg-brand-white py-[102px]" aria-label="Insight articles">
       <Container className="flex flex-col gap-[45px]">
         <div
-          className="flex flex-wrap items-center gap-5"
+          className={cn(
+            "flex items-center gap-5 overflow-x-auto overscroll-x-contain pb-1",
+            "scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            "md:flex-wrap md:overflow-visible",
+          )}
           role="tablist"
           aria-label="Insight categories"
         >
@@ -55,7 +59,7 @@ export function InsightsLandingContent({
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActive(filter.id)}
-                className="inline-flex items-center gap-[10px] font-sans text-lg font-normal leading-5 text-brand-black"
+                className="inline-flex shrink-0 items-center gap-[10px] whitespace-nowrap font-sans text-lg font-normal leading-5 text-brand-black"
               >
                 {showDot ? (
                   <span
@@ -71,7 +75,7 @@ export function InsightsLandingContent({
                 ) : null}
                 <span
                   className={cn(
-                    "link-underline transition-opacity",
+                    "link-underline transition-opacity duration-300 ease-in-out",
                     isActive
                       ? "link-underline-active opacity-100"
                       : "opacity-50 hover:opacity-100",
