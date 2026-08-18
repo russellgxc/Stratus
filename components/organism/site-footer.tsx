@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 
 const companyLinks = [
   { href: "/about", label: "About us" },
-  { href: "/#practices", label: "Our Practices" },
+  { href: "/#sectors", label: "Sectors" },
+  { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -102,13 +103,13 @@ function FooterLinkList({
 export function SiteFooter({ className }: SiteFooterProps) {
   return (
     <footer className={cn("bg-brand-black text-brand-white", className)}>
-      <Container className="flex flex-col justify-center py-14 lg:min-h-[493px] lg:py-16">
+      <Container className="flex flex-col pt-[100px] pb-14 lg:pb-16">
         <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
           <div className="flex flex-col sm:col-span-2 lg:col-span-1">
             <Link
               href="/#hero"
               aria-label="Stratus Strategies home"
-              className="mb-10 inline-flex w-fit"
+              className="inline-flex w-fit cursor-pointer"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -119,32 +120,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
                 className="size-[79px]"
               />
             </Link>
-
-            <div className="flex flex-1 flex-col gap-[18px]">
-            <p className="font-sans text-lg font-normal leading-normal tracking-[-0.02em] text-[#dfdfdf]">
-              Stratus Strategies
-              <br />
-              Courtice, ON 02144
-              <br />
-              <a
-                href="mailto:hello@stratusstrategies.com"
-                className="link-underline transition-colors duration-200 ease-in-out hover:text-brand-gold"
-              >
-                hello@stratusstrategies.com
-              </a>
-              <br />
-              <a
-                href="tel:+14166272855"
-                className="link-underline transition-colors duration-200 ease-in-out hover:text-brand-gold"
-              >
-                (416) 627-2855
-              </a>
+            <p className="mt-6 font-sans text-sm font-normal tracking-[-0.02em] text-brand-white opacity-40">
+              © {new Date().getFullYear()}. All rights reserved.
             </p>
-
-            <p className="mt-auto pt-10 font-sans text-xs font-normal tracking-[-0.02em] text-brand-white opacity-40 lg:pt-20">
-              © {new Date().getFullYear()} All rights reserved.
-            </p>
-            </div>
           </div>
 
           <div>

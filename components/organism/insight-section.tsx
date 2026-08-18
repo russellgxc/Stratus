@@ -6,20 +6,21 @@ import { CircleArrow } from "@/components/ui/circle-arrow";
 import { InsightCard } from "@/components/ui/insight-card";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
-import { insights as allInsights } from "@/lib/insights";
+import type { InsightItem } from "@/lib/insights";
 import { cn } from "@/lib/utils";
 
 const CARD_WIDTH = 465;
 const SCROLL_DURATION_MS = Math.round(550 * 1.4);
 
-const insights = allInsights.slice(0, 4);
+type InsightSectionProps = {
+  items: InsightItem[];
+};
 
-/** Ease-in-out cubic — soft start and stop */
 function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-export function InsightSection() {
+export function InsightSection({ items }: InsightSectionProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -141,7 +142,7 @@ export function InsightSection() {
               id="insight-heading"
               className="text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
             >
-              Insight
+              insight
             </Typography>
 
             <Typography
@@ -154,7 +155,7 @@ export function InsightSection() {
 
             <TextLink
               href="/insight"
-              arrow={false}
+              arrow="right"
               className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
             >
               View all
@@ -172,7 +173,7 @@ export function InsightSection() {
                 "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
               )}
             >
-              {insights.map((insight) => (
+              {items.map((insight) => (
                 <div
                   key={insight.id}
                   data-insight-card

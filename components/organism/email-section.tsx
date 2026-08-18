@@ -7,12 +7,18 @@ import { CircleArrow } from "@/components/ui/circle-arrow";
 import { Typography } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 
+const SUBSCRIBE_ENABLED = false;
+
 export function EmailSection() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+  }
+
+  if (!SUBSCRIBE_ENABLED) {
+    return null;
   }
 
   return (

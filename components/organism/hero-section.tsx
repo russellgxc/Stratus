@@ -4,7 +4,19 @@ import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
 
-export function HeroSection() {
+type HeroSectionProps = {
+  heading?: string;
+  ctaLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
+
+export function HeroSection({
+  heading = "We work with organizations whose missions influence how people live.",
+  ctaLabel = "More about us",
+  imageSrc = "/hero-illustration.png",
+  imageAlt = "Illustration of people collaborating to climb geometric steps",
+}: HeroSectionProps = {}) {
   return (
     <section
       id="hero"
@@ -32,8 +44,7 @@ export function HeroSection() {
               variant="h1"
               className="text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[1] tracking-normal text-brand-white"
             >
-              We work with organizations whose missions influence how people
-              live.
+              {heading}
             </Typography>
 
             <TextLink
@@ -41,20 +52,20 @@ export function HeroSection() {
               arrow="down"
               className="mt-8 text-2xl leading-[1.85] tracking-[-0.02em] text-brand-white hover:text-brand-white"
             >
-              More about us
+              {ctaLabel}
             </TextLink>
           </div>
         </div>
 
         <div className="hero-image relative flex min-h-0 w-full items-center self-center lg:justify-end">
-          <div className="relative aspect-[696/486] w-full max-w-[700px] overflow-hidden rounded-tl-[clamp(4rem,14vw,12.5rem)]">
+          <div className="relative aspect-[696/486] w-full max-w-[700px] overflow-hidden rounded">
             <Image
-              src="/hero-illustration.png"
-              alt="Collage of people, places, and communities Stratus works with"
+              src={imageSrc}
+              alt={imageAlt}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 700px"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
           </div>
         </div>

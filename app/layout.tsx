@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif_Display } from "next/font/google";
 
-import { EmailSection } from "@/components/organism/email-section";
-import { Navbar } from "@/components/organism/navbar";
-import { SiteFooter } from "@/components/organism/site-footer";
-import { SmoothScroll } from "@/components/smooth-scroll";
+import { SiteChrome } from "@/components/site-chrome";
 
 import "./globals.css";
 
@@ -35,13 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
-        <SmoothScroll />
-        <Navbar />
-        <div className="flex-1">{children}</div>
-        <div className="site-page-end">
-          <EmailSection />
-          <SiteFooter />
-        </div>
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

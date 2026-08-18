@@ -5,41 +5,34 @@ import { Typography } from "@/components/ui/typography";
 
 const practices = [
   {
-    title: "Stratus Advisory",
+    title: "Lorem ipsum dolor sit amet",
     description:
-      "Strategic communications, narrative development, stakeholder engagement, and executive counsel.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra.",
     image: "/practice-advisory.png",
     imageAlt: "People collaborating in a modern studio workspace",
   },
   {
-    title: "Stratus PR™",
+    title: "Lorem ipsum dolor sit amet",
     description:
-      "Media relations, public affairs, reputation management, and crisis communications.",
-    image: "/practice-pr.png",
-    imageAlt: "Grid of people representing media and public relations",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra.",
+    image: "/hero-illustration.png",
+    imageAlt: "Illustration of people collaborating to climb geometric steps",
   },
   {
-    title: "Stratus Forum™",
+    title: "Lorem ipsum dolor sit amet",
     description:
-      "Events, speaker management, public dialogue, and convening.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra.",
     image: "/practice-forum.png",
     imageAlt: "Speech bubbles representing public dialogue and forums",
-  },
-  {
-    title: "Stratus Studio™",
-    description:
-      "Content production, creative strategy, storytelling, and multimedia.",
-    image: "/practice-studio.png",
-    imageAlt: "Lightbulb illustration representing creative studio work",
   },
 ] as const;
 
 export function PracticesSection() {
   return (
     <section
-      id="practices"
+      id="sectors"
       className="site-section flex flex-col bg-brand-white text-brand-black"
-      aria-labelledby="practices-heading"
+      aria-labelledby="sectors-heading"
     >
       {/* Figma: px ~194 / py 146, content rail max 1440 */}
       <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-6 py-[146px]">
@@ -50,34 +43,33 @@ export function PracticesSection() {
             <Typography
               as="h2"
               variant="h2"
-              id="practices-heading"
+              id="sectors-heading"
               className="max-w-[42rem] text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
             >
-              Our Practices
+              sectors
             </Typography>
 
             <Typography
               variant="p1"
               className="max-w-[36.3rem] shrink-0 text-brand-black lg:pt-0"
             >
-              We help organizations navigate complexity and strengthen
-              reputation.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Typography>
           </div>
 
           {/* Practice cards: 100px column gap */}
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-[100px]">
-            {practices.map((practice) => (
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[100px]">
+            {practices.map((practice, index) => (
               <article
-                key={practice.title}
+                key={`${practice.image}-${index}`}
                 className="flex w-full flex-col gap-[35px]"
               >
-                <div className="relative aspect-[262/183] w-full overflow-hidden rounded-tl-[153px]">
+                <div className="relative aspect-[262/183] w-full overflow-hidden rounded">
                   <Image
                     src={practice.image}
                     alt={practice.imageAlt}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover object-center"
                   />
                 </div>
@@ -101,11 +93,11 @@ export function PracticesSection() {
           </div>
 
           <TextLink
-            href="/#sectors"
+            href="/services"
             arrow="right"
             className="self-start text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
           >
-            Explore our Sectors
+            See Our Services
           </TextLink>
         </div>
       </div>

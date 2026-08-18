@@ -35,7 +35,7 @@ export function AboutPageContent() {
                 id="about-intro-heading"
                 className="max-w-[632px] text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
               >
-                We work with organizations whose missions influence how people
+                we work with organizations whose missions influence how people
                 live.
               </Typography>
 
@@ -62,7 +62,7 @@ export function AboutPageContent() {
             </FadeIn>
 
             <FadeIn
-              className="relative aspect-[696/486] w-full min-w-0 max-w-[696px] flex-1 overflow-hidden rounded-tl-[200px] lg:mt-[153px]"
+              className="relative aspect-[696/486] w-full min-w-0 max-w-[696px] flex-1 overflow-hidden rounded lg:mt-[153px]"
               delay={120}
             >
               <Image
@@ -70,7 +70,7 @@ export function AboutPageContent() {
                 alt="Illustration of people building steps together"
                 fill
                 sizes="(max-width: 1024px) 100vw, 696px"
-                className="object-cover object-center"
+                className="object-cover object-top"
                 priority
               />
             </FadeIn>
@@ -90,7 +90,7 @@ export function AboutPageContent() {
               className="flex w-full max-w-[465px] shrink-0 flex-col"
               delay={0}
             >
-              <div className="relative aspect-[465/383] w-full overflow-hidden rounded-tl-[191px] rounded-tr-[10px]">
+              <div className="relative aspect-[465/383] w-full overflow-hidden rounded">
                 <Image
                   src="/about-page-portrait.png"
                   alt="Wind turbines on a misty hillside"
@@ -149,7 +149,7 @@ export function AboutPageContent() {
                 id="about-story-heading"
                 className="max-w-[586px] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black lg:text-[40px]"
               >
-                We help organizations navigate complexity and strengthen
+                we help organizations navigate complexity and strengthen
                 reputation.
               </Typography>
 

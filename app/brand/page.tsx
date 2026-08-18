@@ -6,15 +6,15 @@ import { PageHeader } from "@/components/organism/page-header";
 export const metadata: Metadata = {
   title: "Brand | Stratus Strategies",
   description:
-    "Stratus Strategies brand system — logos, colour, typography, and UI language.",
+    "Stratus Strategies brand system — logos, colour, and typefaces.",
 };
 
 export default function BrandPage() {
   return (
     <main>
       <PageHeader
-        title="Brand"
-        description="Logos, colour, typefaces, and the shared UI language for Stratus Strategies."
+        title="brand"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra."
       />
       <BrandGuide />
     </main>

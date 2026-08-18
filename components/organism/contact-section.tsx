@@ -35,7 +35,7 @@ export function ContactSection() {
                 id="contact-intro-heading"
                 className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black"
               >
-                Get in touch. We’ll help you find the right next step.
+                Get in touch. we’ll help you find the right next step.
               </Typography>
               <Typography
                 variant="body"

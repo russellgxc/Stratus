@@ -201,32 +201,29 @@
     scroll-snap-type: y mandatory;
   }
 
-  .site-section {
+  html:has(.site-section) .site-section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 
-  .site-section:not(.site-section--hero) {
+  html:has(.site-section) .site-section:not(.site-section--hero) {
     height: 100svh;
     min-height: 100svh;
     overflow-x: hidden;
     overflow-y: auto;
   }
 
-  .site-section--hero {
+  html:has(.site-section) .site-section--hero {
     height: 100svh;
     min-height: 100svh;
   }
 
-  /* Subscribe + footer as one trailing snap unit so they remain reachable
-     even when shorter than the viewport. */
-  .site-page-end {
-    min-height: 100svh;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-
-  .site-page-end footer {
+  /* Footer snaps to the bottom of the viewport so a short last block
+     does not leave empty space below it. */
+  html:has(.site-section) .site-page-end {
+    display: flex;
+    flex-direction: column;
+    background-color: #000000;
     scroll-snap-align: end;
     scroll-snap-stop: normal;
   }

@@ -7,8 +7,8 @@ import { InsightCard } from "@/components/ui/insight-card";
 import {
   insightCategories,
   insightCategoryDotClass,
-  insights,
   type InsightCategory,
+  type InsightItem,
 } from "@/lib/insights";
 import { cn } from "@/lib/utils";
 
@@ -24,15 +24,17 @@ const filters: { id: FilterId; label: string }[] = [
 
 export function InsightsLandingContent({
   initialCategory,
+  items,
 }: {
   initialCategory?: InsightCategory;
+  items: InsightItem[];
 }) {
   const [active, setActive] = useState<FilterId>(initialCategory ?? "all");
 
   const visible = useMemo(() => {
-    if (active === "all") return insights;
-    return insights.filter((item) => item.category === active);
-  }, [active]);
+    if (active === "all") return items;
+    return items.filter((item) => item.category === active);
+  }, [active, items]);
 
   return (
     <section className="bg-brand-white py-[102px]" aria-label="Insight articles">

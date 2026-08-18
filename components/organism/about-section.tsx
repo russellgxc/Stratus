@@ -40,27 +40,27 @@ export function AboutSection() {
           id="about-heading"
           className="text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
         >
-          About us
+          about us
         </Typography>
 
         <div className="mt-12 grid w-full grid-cols-1 items-start gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-20">
           <div className="flex w-full flex-col gap-10 lg:gap-16">
-            <div className="relative aspect-[696/486] w-full overflow-hidden rounded-tl-[clamp(4rem,14vw,12.5rem)]">
+            <div className="relative aspect-[696/486] w-full overflow-hidden rounded">
               <Image
                 src="/about-illustration.png"
                 alt="Illustration of people navigating abstract geometric forms"
                 fill
                 sizes="(max-width: 1024px) 100vw, 720px"
-                className="object-cover object-center"
+                className="object-cover object-top"
               />
             </div>
 
             <TextLink
-              href="#practices"
+              href="/about"
               arrow="right"
               className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
             >
-              Explore our Practices
+              More about us
             </TextLink>
           </div>
 

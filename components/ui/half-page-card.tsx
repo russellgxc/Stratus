@@ -110,10 +110,10 @@ export function HalfPageCard({
           <div>
             <p>Email:</p>
             <a
-              href="mailto:Info@stratusstrategies.com"
+              href="mailto:Monifa.Miller@stratusstrategies.ca"
               className="link-underline"
             >
-              Info@stratusstrategies.com
+              Monifa.Miller@stratusstrategies.ca
             </a>
           </div>
           <div>

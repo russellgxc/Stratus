@@ -154,7 +154,7 @@ function scrollToHashWhenReady(
 
 /**
  * Timed ease-in-out smooth scroll for in-page anchors, including
- * hash links that arrive from other routes (e.g. /about → /#practices).
+ * hash links that arrive from other routes (e.g. /about → /#sectors).
  */
 export function SmoothScroll() {
   const pathname = usePathname();

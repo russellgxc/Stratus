@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
 
-import { AboutPageContent } from "@/components/organism/about-page-content";
 import { PageHeader } from "@/components/organism/page-header";
 
 export const metadata: Metadata = {
-  title: "About | Stratus Strategies",
+  title: "Services | Stratus Strategies",
   description:
-    "We work with organizations whose missions influence how people live.",
+    "Services from Stratus Strategies.",
 };
 
-export default function AboutPage() {
+export default function ServicesPage() {
   return (
     <main>
       <PageHeader
-        title="about"
+        title="services"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra."
       />
-      <AboutPageContent />
     </main>
   );
 }

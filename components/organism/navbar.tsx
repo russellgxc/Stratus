@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/#practices", label: "Practices" },
+  { href: "/services", label: "Services" },
   { href: "/insight", label: "Insight" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -72,7 +72,7 @@ export function Navbar({ className }: NavbarProps) {
       <Container className="relative flex items-center justify-between gap-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-3 text-brand-white"
+          className="inline-flex cursor-pointer items-center gap-3 text-brand-white md:w-[190px]"
           aria-label="Stratus home"
           onClick={() => setMenuOpen(false)}
         >
@@ -89,23 +89,15 @@ export function Navbar({ className }: NavbarProps) {
             )}
           />
 
-          {/* Wordmark — desktop only; fades out on scroll */}
-          <span
-            className={cn(
-              "relative hidden h-[39px] overflow-hidden transition-[max-width,opacity] duration-300 ease-in-out md:block",
-              compact ? "max-w-0 opacity-0" : "max-w-[158px] opacity-100",
-            )}
-            aria-hidden={compact}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo-wordmark.svg"
-              alt="stratus"
-              width={158}
-              height={39}
-              className="h-[39px] w-[158px] max-w-none"
-            />
-          </span>
+          {/* Wordmark — desktop only; stays visible on scroll */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-wordmark.svg"
+            alt="stratus"
+            width={158}
+            height={39}
+            className="hidden h-auto min-w-0 flex-1 md:block"
+          />
         </Link>
 
         {/* Desktop links */}
