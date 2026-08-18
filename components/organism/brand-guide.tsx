@@ -34,7 +34,7 @@ export function BrandGuide() {
         aria-labelledby="brand-logos"
       >
         <Container className="flex flex-col items-start gap-16">
-          <div className="flex flex-col gap-4">
+          <div className="flex max-w-[640px] flex-col gap-4">
             <SectionLabel>01 — Logos</SectionLabel>
             <Typography
               as="h2"
@@ -42,48 +42,42 @@ export function BrandGuide() {
               id="brand-logos"
               className="text-brand-black"
             >
-              mark & wordmark
+              logo assets
             </Typography>
           </div>
 
-          <div className="flex flex-col items-start gap-16 sm:flex-row sm:items-center sm:gap-20">
+          <div className="w-full max-w-[700px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo-wordmark.svg"
-              alt="Stratus"
-              width={316}
-              height={78}
-              className="h-[78px] w-auto brightness-0"
-            />
-            <div
-              aria-label="Stratus icon"
-              className="size-[79px] shrink-0 bg-brand-blue"
-              style={{
-                WebkitMaskImage: "url(/logo-mark.svg)",
-                maskImage: "url(/logo-mark.svg)",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-                WebkitMaskPosition: "center",
-                maskPosition: "center",
-                WebkitMaskSize: "contain",
-                maskSize: "contain",
-              }}
+              src="/brand/logo-assets.png"
+              alt="Stratus primary logo, icon, and stacked lockup"
+              width={1024}
+              height={295}
+              className="h-auto w-full bg-transparent"
             />
           </div>
 
-          <a
-            href="/stratus-logos.zip"
-            download="stratus-logos.zip"
-            className="group inline-flex items-center gap-3 text-brand-black"
-          >
-            <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
-              Download all logos
-            </span>
-            <ArrowDown
-              aria-hidden
-              className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
-            />
-          </a>
+          <div className="flex max-w-[640px] flex-col gap-3">
+            <a
+              href="/Stratus_Logos.zip"
+              download="Stratus_Logos.zip"
+              className="group inline-flex items-center gap-3 self-start text-brand-black"
+            >
+              <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
+                Download all logos
+              </span>
+              <ArrowDown
+                aria-hidden
+                className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
+              />
+            </a>
+            <Typography variant="body" className="text-sm leading-5 text-black/40">
+              The zip includes all three variants: primary, icon, and
+              stacked, in blue, black, and white, as PNG and SVG. Use SVG for
+              web and print at any size; use PNG when a raster file is
+              required.
+            </Typography>
+          </div>
         </Container>
       </section>
 

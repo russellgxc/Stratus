@@ -14,7 +14,7 @@ export default function BrandPage() {
     <main>
       <PageHeader
         title="brand"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra."
+        description="Logos, typefaces, and colour."
       />
       <BrandGuide />
     </main>
