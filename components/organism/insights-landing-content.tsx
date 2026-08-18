@@ -72,7 +72,9 @@ export function InsightsLandingContent({
                 <span
                   className={cn(
                     "link-underline transition-opacity",
-                    isActive ? "opacity-100" : "opacity-50 hover:opacity-100",
+                    isActive
+                      ? "link-underline-active opacity-100"
+                      : "opacity-50 hover:opacity-100",
                   )}
                 >
                   {filter.label}

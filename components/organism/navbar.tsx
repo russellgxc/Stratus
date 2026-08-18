@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -17,11 +18,17 @@ const navLinks = [
 
 const COMPACT_AFTER_PX = 48;
 
+function isActivePath(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 type NavbarProps = {
   className?: string;
 };
 
 export function Navbar({ className }: NavbarProps) {
+  const pathname = usePathname();
   const [compact, setCompact] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -108,19 +115,25 @@ export function Navbar({ className }: NavbarProps) {
               compact && "gap-x-5 lg:gap-x-6",
             )}
           >
-            {navLinks.map((link) => (
+            {navLinks.map((link) => {
+              const isActive = isActivePath(pathname, link.href);
+
+              return (
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "link-underline font-sans font-normal leading-5 text-brand-white transition-[font-size] duration-300 ease-in-out",
                     compact ? "text-base" : "text-lg",
+                    isActive && "link-underline-active",
                   )}
                 >
                   {link.label}
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </nav>
 
@@ -152,17 +165,25 @@ export function Navbar({ className }: NavbarProps) {
         <Container className="pb-8 pt-4">
           <nav aria-label="Mobile">
             <ul className="flex flex-col gap-1">
-              {navLinks.map((link) => (
+              {navLinks.map((link) => {
+                const isActive = isActivePath(pathname, link.href);
+
+                return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block py-3 font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-white"
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "link-underline block py-3 font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-white",
+                      isActive && "link-underline-active",
+                    )}
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </nav>
         </Container>

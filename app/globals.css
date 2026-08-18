@@ -45,7 +45,8 @@
   .link-underline:hover::after,
   .link-underline:focus-visible::after,
   .group:hover .link-underline::after,
-  .group:focus-visible .link-underline::after {
+  .group:focus-visible .link-underline::after,
+  .link-underline.link-underline-active::after {
     transform: scaleX(1);
     /* Enter / intro — slightly faster */
     transition-duration: 0.25s;
