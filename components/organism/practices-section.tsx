@@ -38,7 +38,7 @@ export function PracticesSection() {
       <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-6 py-[146px]">
         {/* Figma Frame 14: vertical auto-layout gap 140 */}
         <div className="flex w-full flex-col gap-[140px]">
-          {/* Header row: title left, P1 right */}
+          {/* Header row: title left, P2 right */}
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
             <Typography
               as="h2"
@@ -50,7 +50,7 @@ export function PracticesSection() {
             </Typography>
 
             <Typography
-              variant="p1"
+              variant="p2"
               className="max-w-[36.3rem] shrink-0 text-brand-black lg:pt-0"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
