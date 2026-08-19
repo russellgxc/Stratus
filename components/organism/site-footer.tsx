@@ -103,7 +103,7 @@ function FooterLinkList({
 export function SiteFooter({ className }: SiteFooterProps) {
   return (
     <footer className={cn("bg-brand-black text-brand-white", className)}>
-      <Container className="flex flex-col pt-[100px] pb-14 lg:pb-16">
+      <Container className="flex flex-col pt-[100px] pb-14 lg:pt-[60px] lg:pb-16">
         <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-12">
           <div className="flex flex-col sm:col-span-2 lg:col-span-1">
             <Link

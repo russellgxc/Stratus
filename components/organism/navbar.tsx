@@ -88,11 +88,11 @@ export function Navbar({ className }: NavbarProps) {
           <img
             src="/logo-mark.svg"
             alt=""
-            width={40}
-            height={40}
+            width={64}
+            height={64}
             className={cn(
               "shrink-0 transition-[width,height] duration-300 ease-in-out",
-              "size-12 md:size-10",
+              "size-16 md:size-10",
             )}
           />
 
