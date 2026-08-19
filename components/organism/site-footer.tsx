@@ -28,7 +28,7 @@ const socialLinks = [
     external: true,
   },
   {
-    href: "mailto:hello@stratusstrategies.com",
+    href: "mailto:Monifa.Miller@stratusstrategies.ca",
     label: "Email",
     external: true,
   },

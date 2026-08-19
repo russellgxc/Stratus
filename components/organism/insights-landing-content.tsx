@@ -37,7 +37,10 @@ export function InsightsLandingContent({
   }, [active, items]);
 
   return (
-    <section className="bg-brand-white py-[102px]" aria-label="Insight articles">
+    <section
+      className="bg-brand-white pt-[51px] pb-[102px] md:py-[102px]"
+      aria-label="Insight articles"
+    >
       <Container className="flex flex-col gap-[45px]">
         <div
           className={cn(

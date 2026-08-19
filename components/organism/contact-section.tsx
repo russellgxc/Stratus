@@ -1,6 +1,3 @@
-"use client";
-
-import type { FormEvent } from "react";
 import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -11,21 +8,20 @@ import { cn } from "@/lib/utils";
 const fieldClassName =
   "w-full border-0 border-b-2 border-brand-black bg-transparent pb-3 font-sans text-xl font-normal leading-5 text-brand-black placeholder:text-[#4a4a4a] placeholder:opacity-70 outline-none";
 
+const FORMSUBMIT_ENDPOINT =
+  "https://formsubmit.co/Monifa.Miller@stratusstrategies.ca";
+
 /**
  * Contact page body — Figma 320:1548
  * Left: intro + underline form. Right: HalfPageCard contact (339:1877).
  */
 export function ContactSection() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
   return (
     <section
       className="bg-brand-white text-brand-black"
       aria-labelledby="contact-intro-heading"
     >
-      <Container className="pb-[140px] pt-[99px]">
+      <Container className="pb-[140px] pt-[50px] md:pt-[99px]">
         <div className="flex flex-col gap-16 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
           <div className="flex w-full max-w-[581px] flex-col gap-[84px]">
             <div className="flex flex-col gap-8">
@@ -47,9 +43,26 @@ export function ContactSection() {
             </div>
 
             <form
-              onSubmit={handleSubmit}
+              action={FORMSUBMIT_ENDPOINT}
+              method="POST"
               className="flex w-full flex-col gap-[66px]"
             >
+              <input
+                type="hidden"
+                name="_subject"
+                value="New message from Stratus website"
+              />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="text"
+                name="_honey"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden
+              />
+
               <label className="flex flex-col">
                 <span className="sr-only">First name</span>
                 <input

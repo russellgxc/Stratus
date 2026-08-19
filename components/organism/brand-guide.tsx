@@ -30,7 +30,7 @@ export function BrandGuide() {
     <div className="bg-brand-white text-brand-black">
       {/* Logos */}
       <section
-        className="border-b border-black/10 bg-brand-white py-[102px]"
+        className="border-b border-black/10 bg-brand-white pt-[51px] pb-[102px] md:py-[102px]"
         aria-labelledby="brand-logos"
       >
         <Container className="flex flex-col items-start gap-16">

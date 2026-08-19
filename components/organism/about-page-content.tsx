@@ -20,7 +20,7 @@ export function AboutPageContent() {
     <div className="bg-brand-white text-brand-black">
       {/* Intro */}
       <section
-        className="pt-[99px] lg:pt-[134px]"
+        className="pt-[50px] md:pt-[99px] lg:pt-[134px]"
         aria-labelledby="about-intro-heading"
       >
         <Container>
@@ -129,7 +129,7 @@ export function AboutPageContent() {
                   </li>
                   <li>
                     <a
-                      href="mailto:hello@stratusstrategies.com"
+                      href="mailto:Monifa.Miller@stratusstrategies.ca"
                       className="link-underline font-sans text-lg font-normal leading-5 tracking-[-0.02em] text-brand-black"
                     >
                       Email
