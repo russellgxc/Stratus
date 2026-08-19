@@ -4,6 +4,10 @@ import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
 
+const HERO_HEADING_DEFAULT =
+  "We work with organizations whose missions influence how people live.";
+const HERO_CTA_DEFAULT = "More about us";
+
 type HeroSectionProps = {
   heading?: string;
   ctaLabel?: string;
@@ -12,8 +16,8 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({
-  heading = "We work with organizations whose missions influence how people live.",
-  ctaLabel = "More about us",
+  heading = HERO_HEADING_DEFAULT,
+  ctaLabel = HERO_CTA_DEFAULT,
   imageSrc = "/hero-illustration.png",
   imageAlt = "Illustration of people collaborating to climb geometric steps",
 }: HeroSectionProps = {}) {
@@ -58,8 +62,9 @@ export function HeroSection({
         </div>
 
         <div className="hero-image relative flex min-h-0 w-full items-center self-center lg:justify-end">
-          <div className="relative aspect-[696/486] w-full max-w-[700px] overflow-hidden rounded">
+          <div className="relative aspect-[696/486] w-full max-w-[700px] min-[2000px]:max-w-[900px] overflow-hidden rounded">
             <Image
+              key={imageSrc}
               src={imageSrc}
               alt={imageAlt}
               fill

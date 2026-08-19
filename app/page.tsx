@@ -2,25 +2,42 @@ import { AboutSection } from "@/components/organism/about-section";
 import { HeroSection } from "@/components/organism/hero-section";
 import { InsightSection } from "@/components/organism/insight-section";
 import { PracticesSection } from "@/components/organism/practices-section";
-import { getInsights, getSiteSettings } from "@/sanity/queries";
+import { getHomePage, getInsights } from "@/sanity/queries";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function HomePage() {
-  const [items, settings] = await Promise.all([
-    getInsights(),
-    getSiteSettings(),
-  ]);
+  const [items, home] = await Promise.all([getInsights(), getHomePage()]);
 
   return (
     <main>
       <HeroSection
-        heading={settings?.heroHeading}
-        ctaLabel={settings?.heroCtaLabel}
+        heading={home?.heroHeading}
+        ctaLabel={home?.heroCtaLabel}
+        imageSrc={home?.heroImageUrl}
+        imageAlt={home?.heroImageAlt}
       />
-      <AboutSection />
-      <PracticesSection />
-      <InsightSection items={items.slice(0, 4)} />
+      <AboutSection
+        heading={home?.aboutHeading}
+        introTitle={home?.aboutIntroTitle}
+        introBody={home?.aboutIntroBody}
+        imageSrc={home?.aboutImageUrl}
+        imageAlt={home?.aboutImageAlt}
+        ctaLabel={home?.aboutCtaLabel}
+        accordionItems={home?.aboutAccordion}
+      />
+      <PracticesSection
+        heading={home?.sectorsHeading}
+        introText={home?.sectorsIntro}
+        cards={home?.sectorsCards}
+        ctaLabel={home?.sectorsCtaLabel}
+      />
+      <InsightSection
+        items={items.slice(0, 4)}
+        heading={home?.insightHeading}
+        intro={home?.insightIntro}
+        ctaLabel={home?.insightCtaLabel}
+      />
     </main>
   );
 }

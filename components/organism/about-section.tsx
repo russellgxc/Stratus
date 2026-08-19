@@ -4,7 +4,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
 
-const aboutAccordionItems = [
+const defaultAccordionItems = [
   {
     id: "story",
     title: "Our Story",
@@ -25,7 +25,37 @@ const aboutAccordionItems = [
   },
 ] as const;
 
-export function AboutSection() {
+type AboutSectionProps = {
+  heading?: string;
+  introTitle?: string;
+  introBody?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  ctaLabel?: string;
+  accordionItems?: Array<{ title: string; content: string }>;
+};
+
+export function AboutSection({
+  heading = "about us",
+  introTitle = "We help organizations navigate complexity and strengthen reputation.",
+  introBody = "With a focus on strategic planning and operational efficiency, we help organizations navigate complex challenges and achieve their goals. Their team of experts brings a wealth of experience and a fresh perspective, ensuring that clients are equipped to thrive in a competitive landscape.",
+  imageSrc = "/about-illustration.png",
+  imageAlt = "Illustration of people navigating abstract geometric forms",
+  ctaLabel = "More about us",
+  accordionItems,
+}: AboutSectionProps = {}) {
+  const accordion = (accordionItems?.length
+    ? accordionItems.map((item, index) => ({
+        id: `about-${index}`,
+        title: item.title,
+        content: item.content,
+      }))
+    : defaultAccordionItems) as Array<{
+    id: string;
+    title: string;
+    content: string;
+  }>;
+
   return (
     <section
       id="about"
@@ -40,15 +70,15 @@ export function AboutSection() {
           id="about-heading"
           className="text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
         >
-          about us
+          {heading}
         </Typography>
 
         <div className="mt-12 grid w-full grid-cols-1 items-start gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-20">
           <div className="flex w-full flex-col gap-10 lg:gap-16">
             <div className="relative aspect-[696/486] w-full overflow-hidden rounded">
               <Image
-                src="/about-illustration.png"
-                alt="Illustration of people navigating abstract geometric forms"
+                src={imageSrc}
+                alt={imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 720px"
                 className="object-cover object-top"
@@ -60,36 +90,31 @@ export function AboutSection() {
               arrow="right"
               className="hidden text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black lg:inline-flex"
             >
-              More about us
+              {ctaLabel}
             </TextLink>
           </div>
 
           <div className="flex w-full flex-col gap-8 lg:pt-2">
             <div className="flex w-full flex-col gap-6">
               <Typography variant="p2" className="text-brand-black">
-                We help organizations navigate complexity and strengthen
-                reputation.
+                {introTitle}
               </Typography>
               <Typography
                 variant="body"
                 className="text-lg font-normal leading-5 text-brand-black"
               >
-                With a focus on strategic planning and operational efficiency, we
-                help organizations navigate complex challenges and achieve their
-                goals. Their team of experts brings a wealth of experience and a
-                fresh perspective, ensuring that clients are equipped to thrive
-                in a competitive landscape.
+                {introBody}
               </Typography>
             </div>
 
-            <Accordion items={[...aboutAccordionItems]} className="mt-4 w-full" />
+            <Accordion items={accordion} className="mt-4 w-full" />
 
             <TextLink
               href="/about"
               arrow="right"
               className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black lg:hidden"
             >
-              More about us
+              {ctaLabel}
             </TextLink>
           </div>
         </div>

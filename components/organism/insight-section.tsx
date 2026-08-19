@@ -14,13 +14,21 @@ const SCROLL_DURATION_MS = Math.round(550 * 1.4);
 
 type InsightSectionProps = {
   items: InsightItem[];
+  heading?: string;
+  intro?: string;
+  ctaLabel?: string;
 };
 
 function easeInOutCubic(t: number) {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-export function InsightSection({ items }: InsightSectionProps) {
+export function InsightSection({
+  items,
+  heading = "insight",
+  intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin varius tempus metus sed viverra. Duis commodo.",
+  ctaLabel = "View all",
+}: InsightSectionProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -142,15 +150,14 @@ export function InsightSection({ items }: InsightSectionProps) {
               id="insight-heading"
               className="text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
             >
-              insight
+              {heading}
             </Typography>
 
             <Typography
               variant="body"
               className="text-lg leading-5 text-[#4a4a4a]"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-              varius tempus metus sed viverra. Duis commodo.
+              {intro}
             </Typography>
 
             <TextLink
@@ -158,7 +165,7 @@ export function InsightSection({ items }: InsightSectionProps) {
               arrow="right"
               className="text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
             >
-              View all
+              {ctaLabel}
             </TextLink>
           </div>
 

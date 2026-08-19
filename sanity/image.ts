@@ -14,3 +14,21 @@ export function urlForImage(source: unknown) {
     return "";
   }
 }
+
+function assetRefFromImage(source: unknown) {
+  if (!source || typeof source !== "object") return undefined;
+
+  const asset = (source as { asset?: { _ref?: string } }).asset;
+  return asset?._ref;
+}
+
+export function urlForImageWithRevision(source: unknown) {
+  const url = urlForImage(source);
+  if (!url) return "";
+
+  const assetRef = assetRefFromImage(source);
+  if (!assetRef) return url;
+
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}v=${encodeURIComponent(assetRef)}`;
+}

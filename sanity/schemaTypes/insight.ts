@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 
+import { LOREM_MEDIUM } from "../defaults";
+
 export const insightType = defineType({
   name: "insight",
   title: "Insight",
@@ -43,6 +45,7 @@ export const insightType = defineType({
           name: "alt",
           title: "Alt text",
           type: "string",
+          initialValue: LOREM_MEDIUM,
         }),
       ],
       validation: (rule) => rule.required(),
@@ -52,12 +55,53 @@ export const insightType = defineType({
       title: "Excerpt",
       type: "text",
       rows: 3,
+      initialValue: LOREM_MEDIUM,
     }),
     defineField({
       name: "body",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }],
+      of: [
+        {
+          type: "block",
+          marks: {
+            annotations: [
+              {
+                name: "link",
+                type: "object",
+                title: "Link",
+                fields: [
+                  {
+                    name: "href",
+                    type: "url",
+                    title: "URL",
+                    validation: (rule) =>
+                      rule.uri({ allowRelative: true, scheme: ["http", "https", "mailto"] }),
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              initialValue: LOREM_MEDIUM,
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption",
+              type: "string",
+              initialValue: LOREM_MEDIUM,
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: "order",

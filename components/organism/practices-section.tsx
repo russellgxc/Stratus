@@ -3,7 +3,7 @@ import Image from "next/image";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
 
-const practices = [
+const defaultPractices = [
   {
     title: "Lorem ipsum dolor sit amet",
     description:
@@ -27,7 +27,26 @@ const practices = [
   },
 ] as const;
 
-export function PracticesSection() {
+type PracticesSectionProps = {
+  heading?: string;
+  introText?: string;
+  ctaLabel?: string;
+  cards?: Array<{
+    title: string;
+    description: string;
+    image: string;
+    imageAlt: string;
+  }>;
+};
+
+export function PracticesSection({
+  heading = "sectors",
+  introText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  ctaLabel = "See Our Services",
+  cards,
+}: PracticesSectionProps = {}) {
+  const practices = cards?.length ? cards : defaultPractices;
+
   return (
     <section
       id="sectors"
@@ -46,14 +65,14 @@ export function PracticesSection() {
               id="sectors-heading"
               className="max-w-[42rem] text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
             >
-              sectors
+              {heading}
             </Typography>
 
             <Typography
               variant="p2"
               className="max-w-[36.3rem] shrink-0 text-brand-black lg:pt-0"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              {introText}
             </Typography>
           </div>
 
@@ -61,7 +80,7 @@ export function PracticesSection() {
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[100px]">
             {practices.map((practice, index) => (
               <article
-                key={`${practice.image}-${index}`}
+                key={`${practice.title}-${index}`}
                 className="flex w-full flex-col gap-[35px]"
               >
                 <div className="relative aspect-[262/183] w-full overflow-hidden rounded">
@@ -97,7 +116,7 @@ export function PracticesSection() {
             arrow="right"
             className="self-start text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
           >
-            See Our Services
+            {ctaLabel}
           </TextLink>
         </div>
       </div>
