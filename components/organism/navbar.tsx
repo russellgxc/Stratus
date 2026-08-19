@@ -67,6 +67,17 @@ export function Navbar({ className }: NavbarProps) {
   }, []);
 
   return (
+    <>
+      <button
+        type="button"
+        tabIndex={-1}
+        aria-hidden
+        className={cn(
+          "fixed inset-0 z-40 md:hidden",
+          menuOpen ? "pointer-events-auto" : "pointer-events-none",
+        )}
+        onClick={() => setMenuOpen(false)}
+      />
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 text-brand-white transition-[padding,background-color,box-shadow] duration-300 ease-in-out",
@@ -88,11 +99,11 @@ export function Navbar({ className }: NavbarProps) {
           <img
             src="/logo-mark.svg"
             alt=""
-            width={64}
-            height={64}
+            width={58}
+            height={58}
             className={cn(
               "shrink-0 transition-[width,height] duration-300 ease-in-out",
-              "size-16 md:size-10",
+              "size-[58px] md:size-10",
             )}
           />
 
@@ -140,54 +151,59 @@ export function Navbar({ className }: NavbarProps) {
         {/* Mobile hamburger */}
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center md:hidden"
+          className="inline-flex size-12 items-center justify-center md:hidden"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           onClick={() => setMenuOpen((open) => !open)}
         >
           {menuOpen ? (
-            <X className="size-6" strokeWidth={1.75} />
+            <X className="size-8" strokeWidth={1.75} />
           ) : (
-            <Menu className="size-6" strokeWidth={1.75} />
+            <Menu className="size-8" strokeWidth={1.75} />
           )}
         </button>
       </Container>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — open: fast start then ease; close: smooth */}
       <div
         id="mobile-nav"
         className={cn(
-          "md:hidden overflow-hidden bg-brand-blue transition-[max-height,opacity] duration-300 ease-in-out",
-          menuOpen ? "max-h-[70vh] opacity-100" : "max-h-0 opacity-0",
+          "grid transition-[grid-template-rows] duration-[500ms] md:hidden motion-reduce:transition-none",
+          menuOpen
+            ? "grid-rows-[1fr] [transition-timing-function:cubic-bezier(0.15,0.85,0.25,1)]"
+            : "grid-rows-[0fr] ease-in-out",
         )}
       >
-        <Container className="pb-8 pt-4">
-          <nav aria-label="Mobile">
-            <ul className="flex flex-col gap-1">
-              {navLinks.map((link) => {
-                const isActive = isActivePath(pathname, link.href);
+        <div className="min-h-0 overflow-hidden bg-brand-blue">
+          <Container className="pb-8 pt-[50px]">
+            <nav aria-label="Mobile">
+              <ul className="flex flex-col gap-1">
+                {navLinks.map((link) => {
+                  const isActive = isActivePath(pathname, link.href);
 
-                return (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "link-underline inline-block py-3 font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-white",
-                      isActive && "link-underline-active",
-                    )}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </Container>
+                  return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "link-underline inline-block py-2 font-sans text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-white",
+                        isActive && "link-underline-active",
+                      )}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </Container>
+        </div>
       </div>
     </header>
+    </>
   );
 }
