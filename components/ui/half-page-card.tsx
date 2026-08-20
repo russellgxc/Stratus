@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 export type HalfPageCardProps = {
   label: string;
   title: string;
+  /** Optional body copy under the title rule */
+  description?: string;
   /** Required for muted / blue CTA variants */
   cta?: string;
   href?: string;
@@ -56,6 +58,7 @@ function CardArcs() {
 export function HalfPageCard({
   label,
   title,
+  description,
   cta,
   href = "#",
   variant = "muted",
@@ -135,6 +138,11 @@ export function HalfPageCard({
         {title}
       </h3>
       <span aria-hidden className={cn(ruleClassName, "mt-8 lg:mt-10")} />
+      {description ? (
+        <p className="relative z-10 mt-8 max-w-[405px] font-sans text-lg font-normal leading-5 lg:mt-10">
+          {description}
+        </p>
+      ) : null}
       <div className="relative z-10 mt-auto flex items-center justify-between gap-4 pt-16">
         <span className="link-underline font-sans text-xl font-normal leading-[44.6px] tracking-[-0.02em]">
           {cta}
