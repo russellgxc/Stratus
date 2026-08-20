@@ -25,14 +25,21 @@ function isActivePath(pathname: string, href: string) {
 
 type NavbarProps = {
   className?: string;
+  variant?: "default" | "slim";
 };
 
-export function Navbar({ className }: NavbarProps) {
+export function Navbar({ className, variant = "default" }: NavbarProps) {
   const pathname = usePathname();
-  const [compact, setCompact] = useState(false);
+  const isSlim = variant === "slim";
+  const [compact, setCompact] = useState(isSlim);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (isSlim) {
+      setCompact(true);
+      return;
+    }
+
     function onScroll() {
       setCompact(window.scrollY > COMPACT_AFTER_PX);
     }
@@ -40,7 +47,7 @@ export function Navbar({ className }: NavbarProps) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isSlim]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -66,6 +73,8 @@ export function Navbar({ className }: NavbarProps) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const showCompact = isSlim || compact || menuOpen;
+
   return (
     <>
       <button
@@ -81,7 +90,7 @@ export function Navbar({ className }: NavbarProps) {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 text-brand-white transition-[padding,background-color,box-shadow] duration-300 ease-in-out",
-        compact || menuOpen
+        showCompact
           ? "bg-brand-blue py-3 shadow-[0_1px_0_rgba(0,0,0,0.08)]"
           : "bg-transparent py-6 lg:py-11",
         className,
@@ -123,7 +132,7 @@ export function Navbar({ className }: NavbarProps) {
           <ul
             className={cn(
               "flex items-center justify-end gap-x-6 lg:gap-x-8",
-              compact && "gap-x-5 lg:gap-x-6",
+              showCompact && "gap-x-5 lg:gap-x-6",
             )}
           >
             {navLinks.map((link) => {
@@ -136,7 +145,7 @@ export function Navbar({ className }: NavbarProps) {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "link-underline font-sans font-normal leading-5 text-brand-white transition-[font-size] duration-300 ease-in-out",
-                    compact ? "text-base" : "text-lg",
+                    showCompact ? "text-base" : "text-lg",
                     isActive && "link-underline-active",
                   )}
                 >

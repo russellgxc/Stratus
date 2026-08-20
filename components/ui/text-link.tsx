@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-type ArrowDirection = "down" | "right";
+type ArrowDirection = "down" | "left" | "right";
 
 type TextLinkProps = {
   href: string;
@@ -16,6 +16,7 @@ type TextLinkProps = {
 
 const arrowIcons = {
   down: ArrowDown,
+  left: ArrowLeft,
   right: ArrowRight,
 } as const;
 
@@ -35,8 +36,17 @@ export function TextLink({
 
   const content = (
     <>
+      {ArrowIcon && arrow === "left" ? (
+        <ArrowIcon
+          aria-hidden
+          className={cn(
+            "size-4 shrink-0 transition-transform duration-200 ease-in-out",
+            "group-hover:-translate-x-0.5",
+          )}
+        />
+      ) : null}
       <span className="link-underline">{children}</span>
-      {ArrowIcon ? (
+      {ArrowIcon && arrow !== "left" ? (
         <ArrowIcon
           aria-hidden
           className={cn(

@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-import { LOREM_MEDIUM } from "../defaults";
+import { LOREM_MEDIUM, DEFAULT_INSIGHT_AUTHOR } from "../defaults";
 
 export const insightType = defineType({
   name: "insight",
@@ -56,6 +56,12 @@ export const insightType = defineType({
       type: "text",
       rows: 3,
       initialValue: LOREM_MEDIUM,
+    }),
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "string",
+      initialValue: DEFAULT_INSIGHT_AUTHOR,
     }),
     defineField({
       name: "body",

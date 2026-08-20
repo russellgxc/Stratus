@@ -50,3 +50,5 @@ export const LOREM_SERVICE_SECTIONS = [
     description: LOREM_LONG,
   },
 ] as const;
+
+export const DEFAULT_INSIGHT_AUTHOR = "Monifa Miller";

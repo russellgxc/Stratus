@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from "@portabletext/types";
+
 import {
   insightCategories,
   insights as fallbackInsights,
@@ -13,6 +15,7 @@ import {
   LOREM_LONG,
   LOREM_MEDIUM,
   LOREM_SHORT,
+  DEFAULT_INSIGHT_AUTHOR,
 } from "./defaults";
 import { urlForImageWithRevision } from "./image";
 
@@ -23,6 +26,15 @@ type SanityInsight = {
   category?: string;
   image?: unknown;
   imageAlt?: string;
+  excerpt?: string;
+  author?: string;
+  body?: PortableTextBlock[];
+};
+
+export type InsightDetail = InsightItem & {
+  excerpt?: string;
+  author?: string;
+  body?: PortableTextBlock[];
 };
 
 type SanitySiteSettings = {
@@ -226,6 +238,36 @@ function mapInsight(doc: SanityInsight): InsightItem | null {
   };
 }
 
+function mapInsightDetail(doc: SanityInsight): InsightDetail | null {
+  const item = mapInsight(doc);
+  if (!item) return null;
+
+  return {
+    ...item,
+    excerpt: doc.excerpt,
+    author: doc.author ?? DEFAULT_INSIGHT_AUTHOR,
+    body: doc.body,
+  };
+}
+
+function slugFromInsightHref(href: string) {
+  return href.replace(/^\/insight\//, "");
+}
+
+function fallbackInsightBySlug(slug: string): InsightDetail | null {
+  const item = fallbackInsights.find(
+    (insight) => slugFromInsightHref(insight.href) === slug,
+  );
+
+  if (!item) return null;
+
+  return {
+    ...item,
+    excerpt: LOREM_MEDIUM,
+    author: DEFAULT_INSIGHT_AUTHOR,
+  };
+}
+
 export async function getInsights(): Promise<InsightItem[]> {
   if (!client) return fallbackInsights;
 
@@ -245,6 +287,68 @@ export async function getInsights(): Promise<InsightItem[]> {
     return mapped.length > 0 ? mapped : fallbackInsights;
   } catch {
     return fallbackInsights;
+  }
+}
+
+export async function getInsightSlugs(): Promise<string[]> {
+  const items = await getInsights();
+  return [...new Set(items.map((item) => slugFromInsightHref(item.href)))];
+}
+
+export async function getRelatedInsights(
+  currentSlug: string,
+  limit = 3,
+): Promise<InsightItem[]> {
+  const primary = await getInsights();
+  const pool: InsightItem[] = [...primary];
+
+  for (const item of fallbackInsights) {
+    if (!pool.some((entry) => entry.href === item.href)) {
+      pool.push(item);
+    }
+  }
+
+  const seen = new Set<string>();
+  const related: InsightItem[] = [];
+
+  for (const item of pool) {
+    const slug = slugFromInsightHref(item.href);
+    if (slug === currentSlug || seen.has(item.href)) continue;
+
+    seen.add(item.href);
+    related.push(item);
+    if (related.length >= limit) break;
+  }
+
+  return related;
+}
+
+export async function getInsightBySlug(slug: string): Promise<InsightDetail | null> {
+  if (!client) return fallbackInsightBySlug(slug);
+
+  try {
+    const doc = await client.fetch<SanityInsight | null>(
+      `*[_type == "insight" && slug.current == $slug][0]{
+        _id,
+        title,
+        "slug": slug.current,
+        category,
+        image,
+        "imageAlt": coalesce(image.alt, title),
+        excerpt,
+        author,
+        body
+      }`,
+      { slug },
+    );
+
+    if (doc) {
+      return mapInsightDetail(doc);
+    }
+
+    return fallbackInsightBySlug(slug);
+  } catch {
+    return fallbackInsightBySlug(slug);
   }
 }
 

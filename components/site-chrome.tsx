@@ -14,10 +14,13 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     return children;
   }
 
+  const isInsightPost =
+    pathname.startsWith("/insight/") && pathname !== "/insight/";
+
   return (
     <>
       <SmoothScroll />
-      <Navbar />
+      <Navbar variant={isInsightPost ? "slim" : "default"} />
       <div className="flex-1">{children}</div>
       <div className="site-page-end">
         <EmailSection />
