@@ -34,17 +34,14 @@ export function BrandGuide() {
         aria-labelledby="brand-logos"
       >
         <Container className="flex flex-col items-start gap-16">
-          <div className="flex max-w-[640px] flex-col gap-4">
-            <SectionLabel>01 — Logos</SectionLabel>
-            <Typography
-              as="h2"
-              variant="p1"
-              id="brand-logos"
-              className="text-brand-black"
-            >
-              logo assets
-            </Typography>
-          </div>
+          <Typography
+            as="h2"
+            variant="p1"
+            id="brand-logos"
+            className="max-w-[640px] text-brand-black"
+          >
+            logo assets
+          </Typography>
 
           <div className="w-full max-w-[700px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -87,12 +84,14 @@ export function BrandGuide() {
         aria-labelledby="brand-fonts"
       >
         <Container className="flex flex-col gap-12">
-          <div className="flex max-w-[640px] flex-col gap-4">
-            <SectionLabel>02 — Fonts</SectionLabel>
-            <Typography as="h2" variant="p1" id="brand-fonts" className="text-brand-black">
-              typefaces
-            </Typography>
-          </div>
+          <Typography
+            as="h2"
+            variant="p1"
+            id="brand-fonts"
+            className="max-w-[640px] text-brand-black"
+          >
+            typefaces
+          </Typography>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-6 rounded-[10px] bg-brand-muted p-8 lg:p-12">
@@ -149,7 +148,6 @@ export function BrandGuide() {
       <section className="py-[102px]" aria-labelledby="brand-colour">
         <Container className="flex flex-col gap-12">
           <div className="flex max-w-[640px] flex-col gap-4">
-            <SectionLabel>03 — Colour</SectionLabel>
             <Typography as="h2" variant="p1" id="brand-colour" className="text-brand-black">
               brand palette
             </Typography>
