@@ -95,7 +95,7 @@ export function HalfPageCard({
       <CardArcs />
       <div className="relative z-10 flex w-full max-w-[541px] flex-col gap-7">
         <p className="font-sans text-lg font-normal leading-5">{label}</p>
-        <h3 className="max-w-[541px] font-serif text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.05em]">
+        <h3 className="max-w-[541px] font-serif text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-none tracking-[-0.03em]">
           {title}
         </h3>
         <span aria-hidden className={ruleClassName} />
@@ -134,7 +134,7 @@ export function HalfPageCard({
       <p className="relative z-10 font-sans text-lg font-normal leading-5">
         {label}
       </p>
-      <h3 className="relative z-10 mt-6 max-w-[541px] font-serif text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.05em] lg:mt-[26px]">
+      <h3 className="relative z-10 mt-6 max-w-[541px] font-serif text-[clamp(1.75rem,3vw,2.5rem)] font-medium leading-none tracking-[-0.03em] lg:mt-[26px]">
         {title}
       </h3>
       <span aria-hidden className={cn(ruleClassName, "mt-8 lg:mt-10")} />

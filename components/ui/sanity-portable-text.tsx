@@ -22,7 +22,7 @@ const components: PortableTextComponents = {
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-sans text-2xl font-normal leading-tight tracking-[-0.02em] text-brand-black">
+      <h3 className="font-serif text-2xl font-medium leading-tight tracking-[-0.03em] text-brand-black">
         {children}
       </h3>
     ),

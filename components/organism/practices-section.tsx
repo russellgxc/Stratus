@@ -97,7 +97,7 @@ export function PracticesSection({
                 <div className="flex flex-col gap-[18px]">
                   <Typography
                     as="h3"
-                    variant="p2"
+                    variant="h3"
                     className="text-brand-black"
                   >
                     {practice.title}

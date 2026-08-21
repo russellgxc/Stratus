@@ -12,9 +12,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const notoSerif = Noto_Serif_Display({
+const notoSerifDisplay = Noto_Serif_Display({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
   variable: "--font-noto-serif",
   display: "swap",
 });
@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoSerif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${notoSerifDisplay.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
         <Script id="hotjar" strategy="afterInteractive">
           {`(function(h,o,t,j,a,r){
