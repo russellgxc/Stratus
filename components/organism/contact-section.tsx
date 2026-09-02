@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { HalfPageCard } from "@/components/ui/half-page-card";
 import { Typography } from "@/components/ui/typography";
+import type { SanityContactPage } from "@/sanity/queries";
 import { cn } from "@/lib/utils";
 
 const fieldClassName =
@@ -15,7 +16,21 @@ const FORMSUBMIT_ENDPOINT =
  * Contact page body — Figma 320:1548
  * Left: intro + underline form. Right: HalfPageCard contact (339:1877).
  */
-export function ContactSection() {
+export function ContactSection({
+  contact,
+}: {
+  contact?: SanityContactPage | null;
+}) {
+  const heading =
+    contact?.heading ??
+    "Get in touch. we’ll help you find the right next step.";
+  const body =
+    contact?.body ??
+    "Vivamus vehicula purus ligula, nec luctus risus placerat ac. Donec in lacus est. Nam eu dolor varius, finibus lorem in.";
+  const cardLabel = contact?.cardLabel ?? "Lorem ipsum";
+  const cardTitle =
+    contact?.cardTitle ?? "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
   return (
     <section
       className="bg-brand-white text-brand-black"
@@ -31,14 +46,13 @@ export function ContactSection() {
                 id="contact-intro-heading"
                 className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black"
               >
-                Get in touch. we’ll help you find the right next step.
+                {heading}
               </Typography>
               <Typography
                 variant="body"
                 className="max-w-[539px] text-lg leading-5 text-brand-black"
               >
-                Vivamus vehicula purus ligula, nec luctus risus placerat ac.
-                Donec in lacus est. Nam eu dolor varius, finibus lorem in.
+                {body}
               </Typography>
             </div>
 
@@ -137,8 +151,8 @@ export function ContactSection() {
 
           <HalfPageCard
             variant="contact"
-            label="Lorem ipsum"
-            title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            label={cardLabel}
+            title={cardTitle}
             className="lg:ml-auto lg:max-w-[710px]"
           />
         </div>

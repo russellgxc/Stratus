@@ -123,7 +123,9 @@ export function InsightPostContent({
         </Container>
       </article>
 
-      <InsightRelatedStories items={relatedItems} />
+      {relatedItems.length > 0 ? (
+        <InsightRelatedStories items={relatedItems} />
+      ) : null}
     </>
   );
 }

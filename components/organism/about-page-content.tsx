@@ -6,6 +6,9 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { HalfPageCard } from "@/components/ui/half-page-card";
 import { Container } from "@/components/ui/container";
 import { Typography } from "@/components/ui/typography";
+import { LOREM_MEDIUM } from "@/sanity/defaults";
+import { urlForImageWithRevision } from "@/sanity/image";
+import type { SanityAboutPage } from "@/sanity/queries";
 
 /**
  * About page body — Figma 325:1690
@@ -15,7 +18,32 @@ import { Typography } from "@/components/ui/typography";
  * Section stack gap: 183
  * Cards: 710 + 20 + 710
  */
-export function AboutPageContent() {
+export function AboutPageContent({
+  about,
+}: {
+  about?: SanityAboutPage | null;
+}) {
+  const introHeading =
+    about?.introHeading ??
+    "we work with organizations whose missions influence how people live.";
+  const introBody = about?.introBody ?? LOREM_MEDIUM;
+  const introImage =
+    urlForImageWithRevision(about?.introImage) || "/about-illustration.png";
+  const introImageAlt =
+    about?.introImageAlt ?? "Illustration of people building steps together";
+  const founderName = about?.founderName ?? "Monifa Miller";
+  const founderBio = about?.founderBio ?? LOREM_MEDIUM;
+  const founderImage =
+    urlForImageWithRevision(about?.founderImage) || "/about-page-portrait.png";
+  const founderImageAlt =
+    about?.founderImageAlt ?? "Wind turbines on a misty hillside";
+  const storyHeading =
+    about?.storyHeading ??
+    "we help organizations navigate complexity and strengthen reputation.";
+  const missionStatement =
+    about?.missionStatement ??
+    "To help organizations navigate complexity and strengthen reputation.";
+
   return (
     <div className="bg-brand-white text-brand-black">
       {/* Intro */}
@@ -35,16 +63,14 @@ export function AboutPageContent() {
                 id="about-intro-heading"
                 className="max-w-[632px] text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
               >
-                we work with organizations whose missions influence how people
-                live.
+                {introHeading}
               </Typography>
 
               <Typography
                 variant="body"
                 className="mt-[53px] max-w-[328px] text-lg leading-5 text-brand-black"
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                varius tempus metus sed viverra.
+                {introBody}
               </Typography>
 
               <Link
@@ -66,8 +92,8 @@ export function AboutPageContent() {
               delay={120}
             >
               <Image
-                src="/about-illustration.png"
-                alt="Illustration of people building steps together"
+                src={introImage}
+                alt={introImageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 696px"
                 className="object-cover object-top"
@@ -92,8 +118,8 @@ export function AboutPageContent() {
             >
               <div className="relative aspect-[465/383] w-full overflow-hidden rounded">
                 <Image
-                  src="/about-page-portrait.png"
-                  alt="Wind turbines on a misty hillside"
+                  src={founderImage}
+                  alt={founderImageAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 465px"
                   className="object-cover object-[30%_center]"
@@ -101,10 +127,10 @@ export function AboutPageContent() {
               </div>
               <div className="mt-4">
                 <p className="font-sans text-[30px] font-normal leading-none tracking-[-0.02em] text-brand-black">
-                  Monifa Miller
+                  {founderName}
                 </p>
                 <p className="mt-[10px] max-w-[296px] font-sans text-lg font-normal leading-5 text-brand-black">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  {founderBio}
                 </p>
                 <ul className="mt-6 flex flex-col gap-1">
                   <li>
@@ -149,8 +175,7 @@ export function AboutPageContent() {
                 id="about-story-heading"
                 className="max-w-[586px] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black lg:text-[40px]"
               >
-                we help organizations navigate complexity and strengthen
-                reputation.
+                {storyHeading}
               </Typography>
 
               <div className="mt-[21px] flex max-w-[586px] flex-col gap-5 font-sans text-lg font-normal leading-5 text-brand-black">
@@ -219,7 +244,7 @@ export function AboutPageContent() {
             <FadeIn delay={0}>
               <HalfPageCard
                 label="Our Mission"
-                title="To help organizations navigate complexity and strengthen reputation."
+                title={missionStatement}
                 cta="Download report"
                 href="#"
                 arrow="down"
@@ -229,7 +254,7 @@ export function AboutPageContent() {
             <FadeIn delay={120}>
               <HalfPageCard
                 label="Connect with us"
-                title="We help organizations navigate complexity and strengthen reputation."
+                title={storyHeading}
                 cta="Contact us"
                 href="/contact"
                 className="lg:max-w-none"

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 import { ContactSection } from "@/components/organism/contact-section";
 import { PageHeader } from "@/components/organism/page-header";
+import { getContactPage } from "@/sanity/queries";
+
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Contact | Stratus Strategies",
@@ -9,11 +12,13 @@ export const metadata: Metadata = {
     "We help organizations navigate complexity and strengthen reputation. Get in touch with Stratus Strategies.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contact = await getContactPage();
+
   return (
     <main>
       <PageHeader title="contact" />
-      <ContactSection />
+      <ContactSection contact={contact} />
     </main>
   );
 }

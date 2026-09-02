@@ -19,6 +19,10 @@ import {
 } from "./defaults";
 import { urlForImageWithRevision } from "./image";
 
+const fetchOptions = { cache: "no-store" as const };
+
+const publishedInsightsFilter = `*[_type == "insight" && !(_id in path("drafts.**")) && defined(slug.current)]`;
+
 type SanityInsight = {
   _id: string;
   title?: string;
@@ -273,7 +277,7 @@ export async function getInsights(): Promise<InsightItem[]> {
 
   try {
     const docs = await client.fetch<SanityInsight[]>(
-      `*[_type == "insight" && defined(slug.current)] | order(order asc, _createdAt desc) {
+      `${publishedInsightsFilter} | order(order asc, _createdAt desc) {
         _id,
         title,
         "slug": slug.current,
@@ -281,37 +285,47 @@ export async function getInsights(): Promise<InsightItem[]> {
         image,
         "imageAlt": coalesce(image.alt, title)
       }`,
+      {},
+      fetchOptions,
     );
 
-    const mapped = docs.map(mapInsight).filter((item): item is InsightItem => Boolean(item));
-    return mapped.length > 0 ? mapped : fallbackInsights;
+    return docs
+      .map(mapInsight)
+      .filter((item): item is InsightItem => Boolean(item));
   } catch {
     return fallbackInsights;
   }
 }
 
 export async function getInsightSlugs(): Promise<string[]> {
-  const items = await getInsights();
-  return [...new Set(items.map((item) => slugFromInsightHref(item.href)))];
+  if (!client) {
+    return [...new Set(fallbackInsights.map((item) => slugFromInsightHref(item.href)))];
+  }
+
+  try {
+    const slugs = await client.fetch<string[]>(
+      `${publishedInsightsFilter}{ "slug": slug.current }.slug`,
+      {},
+      fetchOptions,
+    );
+
+    return [...new Set(slugs.filter(Boolean))];
+  } catch {
+    return [...new Set(fallbackInsights.map((item) => slugFromInsightHref(item.href)))];
+  }
 }
 
 export async function getRelatedInsights(
   currentSlug: string,
   limit = 3,
 ): Promise<InsightItem[]> {
-  const primary = await getInsights();
-  const pool: InsightItem[] = [...primary];
+  if (!client) return [];
 
-  for (const item of fallbackInsights) {
-    if (!pool.some((entry) => entry.href === item.href)) {
-      pool.push(item);
-    }
-  }
-
+  const items = await getInsights();
   const seen = new Set<string>();
   const related: InsightItem[] = [];
 
-  for (const item of pool) {
+  for (const item of items) {
     const slug = slugFromInsightHref(item.href);
     if (slug === currentSlug || seen.has(item.href)) continue;
 
@@ -328,7 +342,7 @@ export async function getInsightBySlug(slug: string): Promise<InsightDetail | nu
 
   try {
     const doc = await client.fetch<SanityInsight | null>(
-      `*[_type == "insight" && slug.current == $slug][0]{
+      `*[_type == "insight" && !(_id in path("drafts.**")) && slug.current == $slug][0]{
         _id,
         title,
         "slug": slug.current,
@@ -340,6 +354,7 @@ export async function getInsightBySlug(slug: string): Promise<InsightDetail | nu
         body
       }`,
       { slug },
+      fetchOptions,
     );
 
     if (doc) {
@@ -456,6 +471,8 @@ export async function getAboutPage(): Promise<SanityAboutPage | null> {
         storyBody,
         missionStatement
       }`,
+      {},
+      fetchOptions,
     );
   } catch {
     return null;
@@ -476,6 +493,8 @@ export async function getContactPage(): Promise<SanityContactPage | null> {
       `*[_id == "contactPage"][0]{
         heading, body, cardLabel, cardTitle
       }`,
+      {},
+      fetchOptions,
     );
   } catch {
     return null;
@@ -507,6 +526,8 @@ export async function getServicesPage(): Promise<SanityServicesPage | null> {
           "imageAlt": coalesce(image.alt, title)
         }
       }`,
+      {},
+      fetchOptions,
     );
   } catch {
     return null;
@@ -540,6 +561,8 @@ export async function getSectors(): Promise<SanitySectors | null> {
           "imageAlt": coalesce(image.alt, title)
         }
       }`,
+      {},
+      fetchOptions,
     );
   } catch {
     return null;
