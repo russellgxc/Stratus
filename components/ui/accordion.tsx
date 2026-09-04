@@ -39,7 +39,7 @@ export function Accordion({
               onClick={() => setOpenId(isOpen ? null : item.id)}
               className="flex w-full items-start justify-between gap-6 py-5 text-left"
             >
-              <span className="font-sans text-2xl font-normal leading-[1.86] tracking-[-0.02em] text-brand-black">
+              <span className="font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-black lg:leading-[1.86]">
                 {item.title}
               </span>
               <CircleChevronDown

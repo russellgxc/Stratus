@@ -13,12 +13,6 @@
   body {
     @apply bg-brand-white font-sans text-brand-dark antialiased;
   }
-
-  h3 {
-    font-family: var(--font-noto-serif), Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-  }
 }
 
 @layer components {
