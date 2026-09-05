@@ -44,7 +44,7 @@ export function PageHeader({ title, description, className }: PageHeaderProps) {
         {description ? (
           <Typography
             variant="body"
-            className="mt-[41px] max-w-[476px] text-lg leading-5 text-brand-white"
+            className="mt-[41px] max-w-[476px] text-lg leading-[1.5rem] text-brand-white"
           >
             {description}
           </Typography>

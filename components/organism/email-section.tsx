@@ -59,7 +59,7 @@ export function EmailSection() {
               </Typography>
               <Typography
                 variant="body"
-                className="mt-[0px] text-lg leading-5 text-brand-black"
+                className="mt-[0px] text-lg leading-[1.5rem] text-brand-black"
               >
                 Subscribe for updates on the latest trends and insights.
               </Typography>

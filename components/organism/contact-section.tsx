@@ -44,13 +44,13 @@ export function ContactSection({
                 as="h2"
                 variant="p1"
                 id="contact-intro-heading"
-                className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black"
+                className="text-[clamp(1.75rem,3vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black"
               >
                 {heading}
               </Typography>
               <Typography
                 variant="body"
-                className="max-w-[539px] text-lg leading-5 text-brand-black"
+                className="max-w-[539px] text-lg leading-[1.5rem] text-brand-black"
               >
                 {body}
               </Typography>
@@ -138,7 +138,7 @@ export function ContactSection({
 
               <button
                 type="submit"
-                className="group inline-flex items-center gap-3 self-start font-sans text-[30px] font-normal leading-none tracking-[-0.02em] text-brand-black"
+                className="group inline-flex items-center gap-3 self-start font-sans text-[30px] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black"
               >
                 <span className="link-underline">Send Message</span>
                 <ArrowRight

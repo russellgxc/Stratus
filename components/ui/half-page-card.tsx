@@ -99,7 +99,7 @@ export function HalfPageCard({
           {title}
         </h3>
         <span aria-hidden className={ruleClassName} />
-        <div className="flex max-w-[405px] flex-col gap-5 font-sans text-lg font-normal leading-5 text-brand-black">
+        <div className="flex max-w-[405px] flex-col gap-5 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
           <div>
             <p>Main office:</p>
             <p>
@@ -139,7 +139,7 @@ export function HalfPageCard({
       </h3>
       <span aria-hidden className={cn(ruleClassName, "mt-8 lg:mt-10")} />
       {description ? (
-        <p className="relative z-10 mt-8 max-w-[405px] font-sans text-lg font-normal leading-5 lg:mt-10">
+        <p className="relative z-10 mt-8 max-w-[405px] font-sans text-lg font-normal leading-[1.5rem] lg:mt-10">
           {description}
         </p>
       ) : null}

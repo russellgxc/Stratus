@@ -101,7 +101,7 @@ export function AboutSection({
               </Typography>
               <Typography
                 variant="body"
-                className="text-lg font-normal leading-5 text-brand-black"
+                className="text-lg font-normal leading-[1.5rem] text-brand-black"
               >
                 {introBody}
               </Typography>

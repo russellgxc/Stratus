@@ -68,7 +68,7 @@ export function AboutPageContent({
 
               <Typography
                 variant="body"
-                className="mt-[53px] max-w-[328px] text-lg leading-5 text-brand-black"
+                className="mt-[53px] max-w-[328px] text-lg leading-[1.5rem] text-brand-black"
               >
                 {introBody}
               </Typography>
@@ -126,10 +126,10 @@ export function AboutPageContent({
                 />
               </div>
               <div className="mt-4">
-                <p className="font-sans text-[30px] font-normal leading-none tracking-[-0.02em] text-brand-black">
+                <p className="font-sans text-[30px] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black">
                   {founderName}
                 </p>
-                <p className="mt-[10px] max-w-[296px] font-sans text-lg font-normal leading-5 text-brand-black">
+                <p className="mt-[10px] max-w-[296px] font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
                   {founderBio}
                 </p>
                 <ul className="mt-6 flex flex-col gap-1">
@@ -173,12 +173,12 @@ export function AboutPageContent({
                 as="h2"
                 variant="p1"
                 id="about-story-heading"
-                className="max-w-[586px] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-black lg:text-[40px]"
+                className="max-w-[586px] text-[clamp(1.75rem,3.5vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black lg:text-[40px]"
               >
                 {storyHeading}
               </Typography>
 
-              <div className="mt-[21px] flex max-w-[586px] flex-col gap-5 font-sans text-lg font-normal leading-5 text-brand-black">
+              <div className="mt-[21px] flex max-w-[586px] flex-col gap-5 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Vivamus vehicula purus ligula, nec luctus risus placerat ac.

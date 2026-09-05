@@ -166,7 +166,7 @@ export function BrandGuide() {
               >
                 <div className={cn("h-36 w-full", color.className)} />
                 <div className="flex flex-col gap-1 bg-brand-muted px-5 py-4">
-                  <p className="font-sans text-lg leading-5 text-brand-black">
+                  <p className="font-sans text-lg leading-[1.5rem] text-brand-black">
                     {color.name}
                   </p>
                   <p className="font-sans text-sm text-brand-black/55">

@@ -39,7 +39,7 @@ export function Accordion({
               onClick={() => setOpenId(isOpen ? null : item.id)}
               className="flex w-full items-start justify-between gap-6 py-5 text-left"
             >
-              <span className="font-sans text-2xl font-normal leading-none tracking-[-0.02em] text-brand-black lg:leading-[1.86]">
+              <span className="font-sans text-2xl font-normal leading-[1.1] tracking-[-0.02em] text-brand-black lg:leading-[1.86]">
                 {item.title}
               </span>
               <CircleChevronDown
@@ -62,7 +62,7 @@ export function Accordion({
               )}
             >
               <div className="overflow-hidden">
-                <p className="max-w-[32.3rem] pb-6 font-sans text-lg font-normal leading-5 text-brand-black">
+                <p className="max-w-[32.3rem] pb-6 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
                   {item.content}
                 </p>
               </div>

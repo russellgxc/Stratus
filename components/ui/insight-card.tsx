@@ -86,7 +86,7 @@ export function InsightCard({
         />
 
         <div className="flex max-w-[306px] flex-col gap-[11px]">
-          <h3 className="font-sans text-[30px] font-normal leading-none tracking-[-0.02em] text-brand-black">
+          <h3 className="font-sans text-[30px] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black">
             {title}
           </h3>
           <p className="font-sans text-sm font-normal leading-[25px] text-brand-black underline underline-offset-2">

@@ -77,7 +77,7 @@ export function InsightPostContent({
               <Typography
                 as="p"
                 variant="body"
-                className="text-lg leading-5 text-brand-black"
+                className="text-lg leading-[1.5rem] text-brand-black"
               >
                 By {author}
               </Typography>
@@ -87,7 +87,7 @@ export function InsightPostContent({
             {excerpt ? (
               <Typography
                 variant="body"
-                className="mt-8 max-w-[632px] text-lg leading-7 text-brand-black"
+                className="mt-8 max-w-[632px] text-lg leading-[1.5rem] text-brand-black"
               >
                 {excerpt}
               </Typography>
@@ -108,7 +108,7 @@ export function InsightPostContent({
               {body?.length ? (
                 <SanityPortableText value={body} />
               ) : (
-                <Typography variant="body" className="text-lg leading-7">
+                <Typography variant="body" className="text-lg leading-[1.5rem]">
                   {LOREM_LONG}
                 </Typography>
               )}

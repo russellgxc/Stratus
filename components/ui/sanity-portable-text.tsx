@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="font-sans text-lg font-normal leading-7 text-brand-black">
+      <p className="font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
         {children}
       </p>
     ),
@@ -34,12 +34,12 @@ const components: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc space-y-2 pl-6 font-sans text-lg leading-7 text-brand-black">
+      <ul className="list-disc space-y-2 pl-6 font-sans text-lg leading-[1.5rem] text-brand-black">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal space-y-2 pl-6 font-sans text-lg leading-7 text-brand-black">
+      <ol className="list-decimal space-y-2 pl-6 font-sans text-lg leading-[1.5rem] text-brand-black">
         {children}
       </ol>
     ),

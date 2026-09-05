@@ -155,7 +155,7 @@ export function InsightSection({
 
             <Typography
               variant="body"
-              className="text-lg leading-5 text-[#4a4a4a]"
+              className="text-lg leading-[1.5rem] text-[#4a4a4a]"
             >
               {intro}
             </Typography>
