@@ -193,6 +193,14 @@
   }
 }
 
+/* Mobile: hero fills the browser height; other sections stay natural flow */
+@media (max-width: 767.98px) {
+  .site-section--hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+}
+
 /*
  * 768–1919: viewport-tall sections + scroll snap.
  * Mobile (<768): natural document flow, no snap.

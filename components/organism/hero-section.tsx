@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 
 const HERO_HEADING_DEFAULT =
   "We work with organizations whose missions influence how people live.";
@@ -18,9 +19,11 @@ type HeroSectionProps = {
 export function HeroSection({
   heading = HERO_HEADING_DEFAULT,
   ctaLabel = HERO_CTA_DEFAULT,
-  imageSrc = "/hero-illustration.png",
+  imageSrc,
   imageAlt = "Illustration of people collaborating to climb geometric steps",
 }: HeroSectionProps = {}) {
+  const hasImage = Boolean(imageSrc);
+
   return (
     <section
       id="hero"
@@ -40,13 +43,35 @@ export function HeroSection({
       </div>
 
       {/* Top padding clears the fixed navbar (expanded height) */}
-      <Container className="relative z-10 grid max-w-[1800px] flex-1 grid-cols-1 items-stretch gap-8 px-6 pb-10 pt-[7.5rem] lg:grid-cols-2 lg:gap-10 lg:pb-16 lg:pt-[8.5rem]">
-        <div className="hero-copy relative z-10 flex items-end self-stretch py-4 lg:pb-[clamp(2rem,7vh,5rem)] lg:pt-[12vh]">
-          <div className="w-full max-w-[39.5rem]">
+      <Container
+        className={cn(
+          "relative z-10 max-w-[1800px] flex-1 gap-8 px-6 pb-10 pt-[7.5rem] lg:gap-10 lg:pb-16 lg:pt-[8.5rem]",
+          hasImage
+            ? "grid grid-cols-1 items-stretch lg:grid-cols-2"
+            : "flex flex-col justify-end",
+        )}
+      >
+        <div
+          className={cn(
+            "hero-copy relative z-10 flex items-end self-stretch py-4 lg:pb-[clamp(2rem,7vh,5rem)] lg:pt-[12vh]",
+            !hasImage && "justify-start",
+          )}
+        >
+          <div
+            className={cn(
+              "w-full text-left",
+              hasImage ? "max-w-[39.5rem]" : "max-w-[72rem]",
+            )}
+          >
             <Typography
               as="h1"
               variant="h1"
-              className="text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-[1] tracking-normal text-brand-white"
+              className={cn(
+                "font-normal text-brand-white",
+                hasImage
+                  ? "text-[clamp(2.25rem,5vw,3.75rem)] leading-[1] tracking-normal"
+                  : "text-[clamp(4.5rem,10vw,7.5rem)] leading-[0.79] tracking-[-0.02em] lg:leading-[1.125]",
+              )}
             >
               {heading}
             </Typography>
@@ -61,19 +86,21 @@ export function HeroSection({
           </div>
         </div>
 
-        <div className="hero-image relative flex min-h-0 w-full items-center self-center lg:justify-end">
-          <div className="relative aspect-[696/486] w-full max-w-[700px] min-[2000px]:max-w-[900px] overflow-hidden rounded">
-            <Image
-              key={imageSrc}
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 700px"
-              className="object-cover object-top"
-            />
+        {hasImage ? (
+          <div className="hero-image relative flex min-h-0 w-full items-center self-center lg:justify-end">
+            <div className="relative aspect-[696/486] w-full max-w-[700px] min-[2000px]:max-w-[900px] overflow-hidden rounded">
+              <Image
+                key={imageSrc}
+                src={imageSrc!}
+                alt={imageAlt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 700px"
+                className="object-cover object-top"
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
       </Container>
     </section>
   );
