@@ -202,10 +202,10 @@
 }
 
 /*
- * 768–1919: viewport-tall sections + scroll snap.
- * Mobile (<768): natural document flow, no snap.
+ * ≥1024–1919: viewport-tall sections + scroll snap.
+ * Mobile/tablet (<1024): natural document flow, no snap.
  */
-@media (min-width: 768px) and (max-width: 1919.98px) {
+@media (min-width: 1024px) and (max-width: 1919.98px) {
   html:has(.site-section) {
     scroll-snap-type: y mandatory;
   }

@@ -70,7 +70,7 @@ export function HeroSection({
                 "font-normal text-brand-white",
                 hasImage
                   ? "text-[clamp(2.25rem,5vw,3.75rem)] leading-[1] tracking-normal"
-                  : "text-[clamp(4.5rem,10vw,7.5rem)] leading-[0.79] tracking-[-0.02em] lg:leading-[1.125]",
+                  : "text-[clamp(4.5rem,10vw,7.5rem)] leading-[0.87] tracking-[-0.02em] lg:leading-[1.125]",
               )}
             >
               {heading}
