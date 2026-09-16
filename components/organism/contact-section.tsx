@@ -30,6 +30,11 @@ export function ContactSection({
   const cardLabel = contact?.cardLabel ?? "Lorem ipsum";
   const cardTitle =
     contact?.cardTitle ?? "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  const officeName = contact?.officeName ?? "Stratus Strategies";
+  const officeAddress =
+    contact?.officeAddress ?? "141 Rosswell Dr.\nCourtice, ON\nL1E 2A4";
+  const email = contact?.email ?? "Monifa.Miller@stratusstrategies.ca";
+  const phone = contact?.phone ?? "416.404.5234";
 
   return (
     <section
@@ -153,6 +158,10 @@ export function ContactSection({
             variant="contact"
             label={cardLabel}
             title={cardTitle}
+            officeName={officeName}
+            officeAddress={officeAddress}
+            email={email}
+            phone={phone}
             className="lg:ml-auto lg:max-w-[710px]"
           />
         </div>

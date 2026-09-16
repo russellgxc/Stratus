@@ -18,6 +18,11 @@ export type HalfPageCardProps = {
    */
   variant?: "muted" | "blue" | "contact";
   arrow?: "right" | "down";
+  /** Contact card: office / email / phone (from Sanity Contact page) */
+  officeName?: string;
+  officeAddress?: string;
+  email?: string;
+  phone?: string;
   className?: string;
 };
 
@@ -63,10 +68,19 @@ export function HalfPageCard({
   href = "#",
   variant = "muted",
   arrow = "right",
+  officeName = "Stratus Strategies",
+  officeAddress = "141 Rosswell Dr.\nCourtice, ON\nL1E 2A4",
+  email = "Monifa.Miller@stratusstrategies.ca",
+  phone = "416.404.5234",
   className,
 }: HalfPageCardProps) {
   const isBlue = variant === "blue";
   const isContact = variant === "contact";
+  const addressLines = officeAddress
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const phoneHref = `tel:+${phone.replace(/\D/g, "")}`;
 
   const shellClassName = cn(
     "group relative flex min-h-[420px] w-full flex-col overflow-hidden rounded-[10px] transition-colors duration-500 ease-in-out lg:min-h-[582px] lg:max-w-[710px]",
@@ -103,27 +117,24 @@ export function HalfPageCard({
           <div>
             <p>Main office:</p>
             <p>
-              Stratus Strategies
-              <br />
-              141 Rosswell Dr.
-              <br />
-              Courtice, ON
-              <br />
-              L1E 2A4
+              {officeName}
+              {addressLines.map((line) => (
+                <span key={line}>
+                  <br />
+                  {line}
+                </span>
+              ))}
             </p>
           </div>
           <div>
             <p>Email:</p>
-            <a
-              href="mailto:Monifa.Miller@stratusstrategies.ca"
-              className="link-underline"
-            >
-              Monifa.Miller@stratusstrategies.ca
+            <a href={`mailto:${email}`} className="link-underline">
+              {email}
             </a>
           </div>
           <div>
             <p>Phone:</p>
-            <a href="tel:+14164045234">416.404.5234</a>
+            <a href={phoneHref}>{phone}</a>
           </div>
         </div>
       </div>

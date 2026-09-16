@@ -44,10 +44,6 @@ export type InsightDetail = InsightItem & {
 type SanitySiteSettings = {
   subscribeHeadline?: string;
   subscribeBody?: string;
-  officeName?: string;
-  officeAddress?: string;
-  email?: string;
-  phone?: string;
 };
 
 type SanityHomePageRaw = {
@@ -374,11 +370,7 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
     return await client.fetch<SanitySiteSettings | null>(
       `*[_type == "siteSettings"] | order(_updatedAt desc)[0]{
         subscribeHeadline,
-        subscribeBody,
-        officeName,
-        officeAddress,
-        email,
-        phone
+        subscribeBody
       }`,
       {},
       { cache: "no-store" },
@@ -484,6 +476,10 @@ export type SanityContactPage = {
   body?: string;
   cardLabel?: string;
   cardTitle?: string;
+  officeName?: string;
+  officeAddress?: string;
+  email?: string;
+  phone?: string;
 };
 
 export async function getContactPage(): Promise<SanityContactPage | null> {
@@ -491,7 +487,14 @@ export async function getContactPage(): Promise<SanityContactPage | null> {
   try {
     return await client.fetch<SanityContactPage | null>(
       `*[_id == "contactPage"][0]{
-        heading, body, cardLabel, cardTitle
+        heading,
+        body,
+        cardLabel,
+        cardTitle,
+        officeName,
+        officeAddress,
+        email,
+        phone
       }`,
       {},
       fetchOptions,

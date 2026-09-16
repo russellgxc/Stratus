@@ -175,7 +175,7 @@
     }
   }
 
-  /** Shared page section shell — heights + snap controlled by breakpoints below */
+  /** Shared page section shell — heights controlled by breakpoints below */
   .site-section {
     position: relative;
     width: 100%;
@@ -198,42 +198,5 @@
   .site-section--hero {
     min-height: 100svh;
     min-height: 100dvh;
-  }
-}
-
-/*
- * ≥1024–1919: viewport-tall sections + scroll snap.
- * Mobile/tablet (<1024): natural document flow, no snap.
- */
-@media (min-width: 1024px) and (max-width: 1919.98px) {
-  html:has(.site-section) {
-    scroll-snap-type: y mandatory;
-  }
-
-  html:has(.site-section) .site-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  html:has(.site-section) .site-section:not(.site-section--hero) {
-    height: 100svh;
-    min-height: 100svh;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  html:has(.site-section) .site-section--hero {
-    height: 100svh;
-    min-height: 100svh;
-  }
-
-  /* Footer snaps to the bottom of the viewport so a short last block
-     does not leave empty space below it. */
-  html:has(.site-section) .site-page-end {
-    display: flex;
-    flex-direction: column;
-    background-color: #000000;
-    scroll-snap-align: end;
-    scroll-snap-stop: normal;
   }
 }
