@@ -6,8 +6,25 @@ import { EmailSection } from "@/components/organism/email-section";
 import { Navbar } from "@/components/organism/navbar";
 import { SiteFooter } from "@/components/organism/site-footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import type { SanityFooterLink } from "@/sanity/queries";
 
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+type SiteChromeProps = {
+  children: React.ReactNode;
+  subscribeHeadline?: string;
+  subscribeBody?: string;
+  footerCompanyLinks?: SanityFooterLink[];
+  footerResourceLinks?: SanityFooterLink[];
+  footerSocialLinks?: SanityFooterLink[];
+};
+
+export function SiteChrome({
+  children,
+  subscribeHeadline,
+  subscribeBody,
+  footerCompanyLinks,
+  footerResourceLinks,
+  footerSocialLinks,
+}: SiteChromeProps) {
   const pathname = usePathname();
 
   if (pathname.startsWith("/studio")) {
@@ -23,8 +40,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <Navbar variant={isInsightPost ? "slim" : "default"} />
       <div className="flex-1">{children}</div>
       <div className="site-page-end">
-        <EmailSection />
-        <SiteFooter />
+        <EmailSection headline={subscribeHeadline} body={subscribeBody} />
+        <SiteFooter
+          companyLinks={footerCompanyLinks}
+          resourceLinks={footerResourceLinks}
+          socialLinks={footerSocialLinks}
+        />
       </div>
     </>
   );

@@ -9,7 +9,15 @@ import { cn } from "@/lib/utils";
 
 const SUBSCRIBE_ENABLED = false;
 
-export function EmailSection() {
+type EmailSectionProps = {
+  headline?: string;
+  body?: string;
+};
+
+export function EmailSection({
+  headline = "Stay ahead of the narrative.",
+  body = "Subscribe for updates on the latest trends and insights.",
+}: EmailSectionProps = {}) {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
@@ -30,14 +38,6 @@ export function EmailSection() {
       )}
       aria-labelledby="subscribe-heading"
     >
-      {/*
-        Figma 287:801 spacing:
-        - pt 74 / pb 138
-        - content ~1415 within 1440 rail
-        - title ↔ copy gap 263
-        - copy stack ↔ form gap 66
-        - fields ~371 wide, ~61 gap, submit 48
-      */}
       <div className="mx-auto w-full max-w-[1440px] px-6 pb-[138px] pt-[74px]">
         <div className="flex w-full flex-col gap-12 lg:flex-row lg:items-start lg:gap-[263px]">
           <Typography
@@ -55,13 +55,13 @@ export function EmailSection() {
                 variant="p2"
                 className="leading-[1.43] text-brand-black"
               >
-                Stay ahead of the narrative.
+                {headline}
               </Typography>
               <Typography
                 variant="body"
                 className="mt-[0px] text-lg leading-[1.5rem] text-brand-black"
               >
-                Subscribe for updates on the latest trends and insights.
+                {body}
               </Typography>
             </div>
 

@@ -3,6 +3,7 @@ import { Inter, Noto_Serif_Display } from "next/font/google";
 import Script from "next/script";
 
 import { SiteChrome } from "@/components/site-chrome";
+import { getSiteSettings } from "@/sanity/queries";
 
 import "./globals.css";
 
@@ -25,11 +26,13 @@ export const metadata: Metadata = {
     "Narrative consultancy for organizations whose missions influence society.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+
   return (
     <html lang="en" className={`${inter.variable} ${notoSerifDisplay.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
@@ -43,7 +46,15 @@ export default function RootLayout({
               a.appendChild(r);
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
         </Script>
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome
+          subscribeHeadline={settings?.subscribeHeadline}
+          subscribeBody={settings?.subscribeBody}
+          footerCompanyLinks={settings?.footerCompanyLinks}
+          footerResourceLinks={settings?.footerResourceLinks}
+          footerSocialLinks={settings?.footerSocialLinks}
+        >
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

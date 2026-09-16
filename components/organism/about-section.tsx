@@ -99,12 +99,14 @@ export function AboutSection({
               <Typography variant="p2" className="text-brand-black">
                 {introTitle}
               </Typography>
-              <Typography
-                variant="body"
-                className="text-lg font-normal leading-[1.5rem] text-brand-black"
-              >
-                {introBody}
-              </Typography>
+              {introBody ? (
+                <Typography
+                  variant="body"
+                  className="text-lg font-normal leading-[1.5rem] text-brand-black"
+                >
+                  {introBody}
+                </Typography>
+              ) : null}
             </div>
 
             <Accordion items={accordion} className="mt-4 w-full" />

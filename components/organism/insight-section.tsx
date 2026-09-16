@@ -153,12 +153,14 @@ export function InsightSection({
               {heading}
             </Typography>
 
-            <Typography
-              variant="body"
-              className="text-lg leading-[1.5rem] text-[#4a4a4a]"
-            >
-              {intro}
-            </Typography>
+            {intro ? (
+              <Typography
+                variant="body"
+                className="text-lg leading-[1.5rem] text-[#4a4a4a]"
+              >
+                {intro}
+              </Typography>
+            ) : null}
 
             <TextLink
               href="/insight"

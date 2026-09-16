@@ -34,13 +34,13 @@ type PracticesSectionProps = {
   cards?: Array<{
     title: string;
     description: string;
-    image: string;
-    imageAlt: string;
+    image?: string;
+    imageAlt?: string;
   }>;
 };
 
 export function PracticesSection({
-  heading = "sectors",
+  heading = "industries",
   introText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   ctaLabel = "See Our Services",
   cards,
@@ -49,9 +49,9 @@ export function PracticesSection({
 
   return (
     <section
-      id="sectors"
+      id="industries"
       className="site-section flex flex-col bg-brand-white text-brand-black"
-      aria-labelledby="sectors-heading"
+      aria-labelledby="industries-heading"
     >
       {/* Figma: px ~194 / py 146, content rail max 1440 */}
       <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center px-6 py-[146px]">
@@ -62,18 +62,20 @@ export function PracticesSection({
             <Typography
               as="h2"
               variant="h2"
-              id="sectors-heading"
+              id="industries-heading"
               className="max-w-[42rem] text-[clamp(3rem,7vw,5.625rem)] font-normal leading-[0.9] tracking-[-0.06em] text-brand-black"
             >
               {heading}
             </Typography>
 
-            <Typography
-              variant="p2"
-              className="max-w-[36.3rem] shrink-0 text-brand-black lg:pt-0"
-            >
-              {introText}
-            </Typography>
+            {introText ? (
+              <Typography
+                variant="p2"
+                className="max-w-[36.3rem] shrink-0 text-brand-black lg:pt-0"
+              >
+                {introText}
+              </Typography>
+            ) : null}
           </div>
 
           {/* Practice cards: 100px column gap */}
@@ -83,15 +85,17 @@ export function PracticesSection({
                 key={`${practice.title}-${index}`}
                 className="flex w-full flex-col gap-[35px]"
               >
-                <div className="relative aspect-[262/183] w-full overflow-hidden rounded">
-                  <Image
-                    src={practice.image}
-                    alt={practice.imageAlt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-center"
-                  />
-                </div>
+                {practice.image ? (
+                  <div className="relative aspect-[262/183] w-full overflow-hidden rounded">
+                    <Image
+                      src={practice.image}
+                      alt={practice.imageAlt || practice.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center"
+                    />
+                  </div>
+                ) : null}
 
                 {/* Title → description gap ~18px */}
                 <div className="flex flex-col gap-[18px]">
@@ -103,9 +107,11 @@ export function PracticesSection({
                     {practice.title}
                   </Typography>
 
-                  <Typography variant="body" className="text-brand-black">
-                    {practice.description}
-                  </Typography>
+                  {practice.description ? (
+                    <Typography variant="body" className="text-brand-black">
+                      {practice.description}
+                    </Typography>
+                  ) : null}
                 </div>
               </article>
             ))}

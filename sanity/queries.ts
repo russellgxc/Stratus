@@ -41,9 +41,18 @@ export type InsightDetail = InsightItem & {
   body?: PortableTextBlock[];
 };
 
-type SanitySiteSettings = {
+export type SanityFooterLink = {
+  label?: string;
+  href?: string;
+  external?: boolean;
+};
+
+export type SanitySiteSettings = {
   subscribeHeadline?: string;
   subscribeBody?: string;
+  footerCompanyLinks?: SanityFooterLink[];
+  footerResourceLinks?: SanityFooterLink[];
+  footerSocialLinks?: SanityFooterLink[];
 };
 
 type SanityHomePageRaw = {
@@ -96,7 +105,7 @@ export type SanityHomePage = {
   sectorsCards?: Array<{
     title: string;
     description: string;
-    image: string;
+    image?: string;
     imageAlt: string;
   }>;
   sectorsCtaLabel?: string;
@@ -138,7 +147,7 @@ const HOME_PAGE_DEFAULTS: Required<
     title: item.title,
     content: item.content,
   })),
-  sectorsHeading: "sectors",
+  sectorsHeading: "industries",
   sectorsIntro: LOREM_SHORT,
   sectorsCtaLabel: "See Our Services",
   insightHeading: "insight",
@@ -150,37 +159,37 @@ function mapHomePage(
   home: SanityHomePageRaw | null,
   legacyHero: LegacySiteSettingsHero | null,
 ): SanityHomePage {
+  if (!home && !legacyHero) {
+    return {
+      ...HOME_PAGE_DEFAULTS,
+      heroImageUrl: undefined,
+      aboutImageUrl: undefined,
+      sectorsCards: undefined,
+    };
+  }
+
   const heroImage = home?.heroImage ?? legacyHero?.heroImage;
+
   const aboutAccordion =
     home?.aboutAccordion
       ?.filter((item) => item.title && item.content)
       .map((item) => ({
         title: item.title!,
         content: item.content!,
-      })) ?? HOME_PAGE_DEFAULTS.aboutAccordion;
+      })) ?? [];
 
-  const sectorsCards = home?.sectorsCards
-    ?.map((card) => {
-      const image = urlForImageWithRevision(card.image);
-      if (!card.title || !image) return null;
-
-      return {
-        title: card.title,
-        description: card.description ?? LOREM_MEDIUM,
-        image,
-        imageAlt: card.imageAlt ?? card.title,
-      };
-    })
-    .filter(
-      (
-        card,
-      ): card is {
-        title: string;
-        description: string;
-        image: string;
-        imageAlt: string;
-      } => Boolean(card),
-    );
+  const sectorsCards =
+    home?.sectorsCards
+      ?.filter((card) => Boolean(card.title))
+      .map((card) => {
+        const image = urlForImageWithRevision(card.image) || undefined;
+        return {
+          title: card.title!,
+          description: card.description ?? "",
+          image,
+          imageAlt: card.imageAlt ?? card.title!,
+        };
+      }) ?? [];
 
   return {
     heroHeading:
@@ -199,18 +208,20 @@ function mapHomePage(
     aboutHeading: home?.aboutHeading ?? HOME_PAGE_DEFAULTS.aboutHeading,
     aboutIntroTitle:
       home?.aboutIntroTitle ?? HOME_PAGE_DEFAULTS.aboutIntroTitle,
-    aboutIntroBody: home?.aboutIntroBody ?? HOME_PAGE_DEFAULTS.aboutIntroBody,
+    aboutIntroBody: home?.aboutIntroBody ?? "",
     aboutImageUrl: urlForImageWithRevision(home?.aboutImage) || undefined,
     aboutImageAlt: home?.aboutImageAlt ?? HOME_PAGE_DEFAULTS.aboutImageAlt,
     aboutCtaLabel: home?.aboutCtaLabel ?? HOME_PAGE_DEFAULTS.aboutCtaLabel,
-    aboutAccordion,
+    aboutAccordion: aboutAccordion.length
+      ? aboutAccordion
+      : HOME_PAGE_DEFAULTS.aboutAccordion,
     sectorsHeading: home?.sectorsHeading ?? HOME_PAGE_DEFAULTS.sectorsHeading,
-    sectorsIntro: home?.sectorsIntro ?? HOME_PAGE_DEFAULTS.sectorsIntro,
-    sectorsCards: sectorsCards?.length ? sectorsCards : undefined,
+    sectorsIntro: home?.sectorsIntro ?? "",
+    sectorsCards: sectorsCards.length ? sectorsCards : undefined,
     sectorsCtaLabel:
       home?.sectorsCtaLabel ?? HOME_PAGE_DEFAULTS.sectorsCtaLabel,
     insightHeading: home?.insightHeading ?? HOME_PAGE_DEFAULTS.insightHeading,
-    insightIntro: home?.insightIntro ?? HOME_PAGE_DEFAULTS.insightIntro,
+    insightIntro: home?.insightIntro ?? "",
     insightCtaLabel:
       home?.insightCtaLabel ?? HOME_PAGE_DEFAULTS.insightCtaLabel,
   };
@@ -368,12 +379,15 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
 
   try {
     return await client.fetch<SanitySiteSettings | null>(
-      `*[_type == "siteSettings"] | order(_updatedAt desc)[0]{
+      `*[_id == "siteSettings"][0]{
         subscribeHeadline,
-        subscribeBody
+        subscribeBody,
+        footerCompanyLinks[]{ label, href, external },
+        footerResourceLinks[]{ label, href, external },
+        footerSocialLinks[]{ label, href, external }
       }`,
       {},
-      { cache: "no-store" },
+      fetchOptions,
     );
   } catch {
     return null;
@@ -386,7 +400,7 @@ export async function getHomePage(): Promise<SanityHomePage> {
   try {
     const [home, legacyHero] = await Promise.all([
       client.fetch<SanityHomePageRaw | null>(
-        `*[_type == "homePage"][0]{
+        `*[_id == "homePage"][0]{
           heroHeading,
           heroCtaLabel,
           heroImage,
@@ -412,17 +426,17 @@ export async function getHomePage(): Promise<SanityHomePage> {
           insightCtaLabel
         }`,
         {},
-        { cache: "no-store" },
+        fetchOptions,
       ),
       client.fetch<LegacySiteSettingsHero | null>(
-        `*[_type == "siteSettings"] | order(_updatedAt desc)[0]{
+        `*[_id == "siteSettings"][0]{
           heroHeading,
           heroCtaLabel,
           heroImage,
           "heroImageAlt": coalesce(heroImage.alt, "Hero image")
         }`,
         {},
-        { cache: "no-store" },
+        fetchOptions,
       ),
     ]);
 
@@ -442,7 +456,7 @@ export type SanityAboutPage = {
   founderImage?: unknown;
   founderImageAlt?: string;
   storyHeading?: string;
-  storyBody?: unknown[];
+  storyBody?: PortableTextBlock[];
   missionStatement?: string;
 };
 

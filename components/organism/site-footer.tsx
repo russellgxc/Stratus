@@ -2,21 +2,28 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
+import type { SanityFooterLink } from "@/sanity/queries";
 
-const companyLinks = [
+export type FooterLinkItem = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
+
+const defaultCompanyLinks: FooterLinkItem[] = [
   { href: "/about", label: "About us" },
-  { href: "/#sectors", label: "Sectors" },
+  { href: "/#industries", label: "Industries" },
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
-] as const;
+];
 
-const resourceLinks = [
+const defaultResourceLinks: FooterLinkItem[] = [
   { href: "/insight", label: "Insights" },
   { href: "/insight?category=pop-politics", label: "Pop & Politics" },
   { href: "/insight?category=industry-alerts", label: "Industry Alerts" },
-] as const;
+];
 
-const socialLinks = [
+const defaultSocialLinks: FooterLinkItem[] = [
   {
     href: "https://www.linkedin.com",
     label: "Linkedin",
@@ -32,10 +39,29 @@ const socialLinks = [
     label: "Email",
     external: true,
   },
-] as const;
+];
+
+function normalizeLinks(
+  links: SanityFooterLink[] | undefined,
+  fallback: FooterLinkItem[],
+): FooterLinkItem[] {
+  const mapped =
+    links
+      ?.filter((link) => link.label && link.href)
+      .map((link) => ({
+        label: link.label!,
+        href: link.href!,
+        external: Boolean(link.external),
+      })) ?? [];
+
+  return mapped.length ? mapped : fallback;
+}
 
 type SiteFooterProps = {
   className?: string;
+  companyLinks?: SanityFooterLink[];
+  resourceLinks?: SanityFooterLink[];
+  socialLinks?: SanityFooterLink[];
 };
 
 function FooterHeading({ children }: { children: string }) {
@@ -79,15 +105,13 @@ function FooterLink({
   );
 }
 
-function FooterLinkList({
-  links,
-}: {
-  links: ReadonlyArray<{ href: string; label: string; external?: boolean }>;
-}) {
+function FooterLinkList({ links }: { links: FooterLinkItem[] }) {
+  if (!links.length) return null;
+
   return (
     <ul className="flex flex-col">
       {links.map((link) => (
-        <li key={link.label}>
+        <li key={`${link.label}-${link.href}`}>
           <FooterLink href={link.href} external={link.external}>
             {link.label}
           </FooterLink>
@@ -100,7 +124,16 @@ function FooterLinkList({
 /**
  * Global site footer — Figma 125:1736
  */
-export function SiteFooter({ className }: SiteFooterProps) {
+export function SiteFooter({
+  className,
+  companyLinks,
+  resourceLinks,
+  socialLinks,
+}: SiteFooterProps) {
+  const company = normalizeLinks(companyLinks, defaultCompanyLinks);
+  const resources = normalizeLinks(resourceLinks, defaultResourceLinks);
+  const social = normalizeLinks(socialLinks, defaultSocialLinks);
+
   return (
     <footer className={cn("bg-brand-black text-brand-white", className)}>
       <Container className="flex flex-col pt-[100px] pb-14 lg:pt-[60px] lg:pb-16">
@@ -125,20 +158,26 @@ export function SiteFooter({ className }: SiteFooterProps) {
             </p>
           </div>
 
-          <div>
-            <FooterHeading>Company</FooterHeading>
-            <FooterLinkList links={companyLinks} />
-          </div>
+          {company.length ? (
+            <div>
+              <FooterHeading>Company</FooterHeading>
+              <FooterLinkList links={company} />
+            </div>
+          ) : null}
 
-          <div>
-            <FooterHeading>Resources</FooterHeading>
-            <FooterLinkList links={resourceLinks} />
-          </div>
+          {resources.length ? (
+            <div>
+              <FooterHeading>Resources</FooterHeading>
+              <FooterLinkList links={resources} />
+            </div>
+          ) : null}
 
-          <div>
-            <FooterHeading>Social</FooterHeading>
-            <FooterLinkList links={socialLinks} />
-          </div>
+          {social.length ? (
+            <div>
+              <FooterHeading>Social</FooterHeading>
+              <FooterLinkList links={social} />
+            </div>
+          ) : null}
         </div>
       </Container>
     </footer>

@@ -26,7 +26,7 @@ export const homePageType = defineType({
   groups: [
     { name: "hero", title: "Hero", default: true },
     { name: "about", title: "About Section" },
-    { name: "sectors", title: "Sectors Section" },
+    { name: "industries", title: "Industries Section" },
     { name: "insight", title: "Insight Section" },
   ],
   fields: [
@@ -137,22 +137,22 @@ export const homePageType = defineType({
       name: "sectorsHeading",
       title: "Section heading",
       type: "string",
-      group: "sectors",
-      initialValue: "sectors",
+      group: "industries",
+      initialValue: "industries",
     }),
     defineField({
       name: "sectorsIntro",
       title: "Intro text",
       type: "text",
       rows: 2,
-      group: "sectors",
+      group: "industries",
       initialValue: LOREM_SHORT,
     }),
     defineField({
       name: "sectorsCards",
-      title: "Sector cards",
+      title: "Industry cards",
       type: "array",
-      group: "sectors",
+      group: "industries",
       initialValue: [...LOREM_SECTOR_CARDS],
       of: [
         {
@@ -193,7 +193,7 @@ export const homePageType = defineType({
       name: "sectorsCtaLabel",
       title: "Link label",
       type: "string",
-      group: "sectors",
+      group: "industries",
       initialValue: "See Our Services",
     }),
 

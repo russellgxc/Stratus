@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown } from "lucide-react";
+import type { PortableTextBlock } from "@portabletext/types";
 
 import { FadeIn } from "@/components/ui/fade-in";
 import { HalfPageCard } from "@/components/ui/half-page-card";
 import { Container } from "@/components/ui/container";
+import { SanityPortableText } from "@/components/ui/sanity-portable-text";
 import { Typography } from "@/components/ui/typography";
 import { LOREM_MEDIUM } from "@/sanity/defaults";
 import { urlForImageWithRevision } from "@/sanity/image";
@@ -16,7 +18,7 @@ import type { SanityAboutPage } from "@/sanity/queries";
  * Intro rail (1440): copy 632 · gap 112 · image 696
  * Story block: image 465 · gap ~104 · copy 586 (inset ~143 from rail)
  * Section stack gap: 183
- * Cards: 710 + 20 + 710
+ * Cards: 710 + 20 · 710
  */
 export function AboutPageContent({
   about,
@@ -40,6 +42,9 @@ export function AboutPageContent({
   const storyHeading =
     about?.storyHeading ??
     "we help organizations navigate complexity and strengthen reputation.";
+  const storyBody = about?.storyBody?.length
+    ? (about.storyBody as PortableTextBlock[])
+    : null;
   const missionStatement =
     about?.missionStatement ??
     "To help organizations navigate complexity and strengthen reputation.";
@@ -178,44 +183,33 @@ export function AboutPageContent({
                 {storyHeading}
               </Typography>
 
-              <div className="mt-[21px] flex max-w-[586px] flex-col gap-5 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus vehicula purus ligula, nec luctus risus placerat ac.
-                  Donec in lacus est. Nam eu dolor varius, finibus lorem in,
-                  sodales risus. Donec arcu enim, tempor sit amet nisl eu,
-                  fermentum elementum est. Ut non erat tortor. Interdum et
-                  malesuada fames ac ante ipsum primis in faucibus. Mauris sed
-                  iaculis augue, vel tempus urna. Praesent maximus tempus felis
-                  sit amet sagittis.
-                </p>
-                <p>
-                  Sed eros lectus, accumsan vitae ultrices vitae, faucibus a
-                  ligula. Phasellus ac faucibus elit, placerat sagittis diam.
-                  Vestibulum eget purus a libero malesuada interdum. Nunc
-                  ultricies vestibulum lacus a sagittis. Fusce vulputate
-                  pulvinar mi maximus scelerisque. Sed suscipit tristique velit,
-                  in dignissim diam tincidunt in.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vivamus vehicula purus ligula, nec luctus risus placerat ac.
-                  Donec in lacus est. Nam eu dolor varius, finibus lorem in,
-                  sodales risus. Donec arcu enim, tempor sit amet nisl eu,
-                  fermentum elementum est. Ut non erat tortor. Interdum et
-                  malesuada fames ac ante ipsum primis in faucibus. Mauris sed
-                  iaculis augue, vel tempus urna. Praesent maximus tempus felis
-                  sit amet sagittis.
-                </p>
-                <p>
-                  Sed eros lectus, accumsan vitae ultrices vitae, faucibus a
-                  ligula. Phasellus ac faucibus elit, placerat sagittis diam.
-                  Vestibulum eget purus a libero malesuada interdum. Nunc
-                  ultricies vestibulum lacus a sagittis. Fusce vulputate
-                  pulvinar mi maximus scelerisque. Sed suscipit tristique velit,
-                  in dignissim diam tincidunt in.
-                </p>
-              </div>
+              {storyBody ? (
+                <SanityPortableText
+                  value={storyBody}
+                  className="mt-[21px] max-w-[586px] gap-5"
+                />
+              ) : (
+                <div className="mt-[21px] flex max-w-[586px] flex-col gap-5 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus vehicula purus ligula, nec luctus risus placerat ac.
+                    Donec in lacus est. Nam eu dolor varius, finibus lorem in,
+                    sodales risus. Donec arcu enim, tempor sit amet nisl eu,
+                    fermentum elementum est. Ut non erat tortor. Interdum et
+                    malesuada fames ac ante ipsum primis in faucibus. Mauris sed
+                    iaculis augue, vel tempus urna. Praesent maximus tempus felis
+                    sit amet sagittis.
+                  </p>
+                  <p>
+                    Sed eros lectus, accumsan vitae ultrices vitae, faucibus a
+                    ligula. Phasellus ac faucibus elit, placerat sagittis diam.
+                    Vestibulum eget purus a libero malesuada interdum. Nunc
+                    ultricies vestibulum lacus a sagittis. Fusce vulputate
+                    pulvinar mi maximus scelerisque. Sed suscipit tristique velit,
+                    in dignissim diam tincidunt in.
+                  </p>
+                </div>
+              )}
 
               <a
                 href="#"

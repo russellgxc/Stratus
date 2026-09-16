@@ -9,8 +9,7 @@ import { cn } from "@/lib/utils";
 const fieldClassName =
   "w-full border-0 border-b-2 border-brand-black bg-transparent pb-3 font-sans text-xl font-normal leading-5 text-brand-black placeholder:text-[#4a4a4a] placeholder:opacity-70 outline-none";
 
-const FORMSUBMIT_ENDPOINT =
-  "https://formsubmit.co/Monifa.Miller@stratusstrategies.ca";
+const DEFAULT_CONTACT_EMAIL = "Monifa.Miller@stratusstrategies.ca";
 
 /**
  * Contact page body — Figma 320:1548
@@ -33,8 +32,9 @@ export function ContactSection({
   const officeName = contact?.officeName ?? "Stratus Strategies";
   const officeAddress =
     contact?.officeAddress ?? "141 Rosswell Dr.\nCourtice, ON\nL1E 2A4";
-  const email = contact?.email ?? "Monifa.Miller@stratusstrategies.ca";
+  const email = contact?.email ?? DEFAULT_CONTACT_EMAIL;
   const phone = contact?.phone ?? "416.404.5234";
+  const formEndpoint = `https://formsubmit.co/${email}`;
 
   return (
     <section
@@ -62,7 +62,7 @@ export function ContactSection({
             </div>
 
             <form
-              action={FORMSUBMIT_ENDPOINT}
+              action={formEndpoint}
               method="POST"
               className="flex w-full flex-col gap-[66px]"
             >

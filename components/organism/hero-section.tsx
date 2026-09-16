@@ -45,7 +45,7 @@ export function HeroSection({
       {/* Top padding clears the fixed navbar (expanded height) */}
       <Container
         className={cn(
-          "relative z-10 max-w-[1800px] flex-1 gap-8 px-6 pb-10 pt-[7.5rem] lg:gap-10 lg:pb-16 lg:pt-[8.5rem]",
+          "relative z-10 max-w-[1800px] flex-1 gap-8 px-6 pb-[100px] pt-[7.5rem] lg:gap-10 lg:pt-[8.5rem]",
           hasImage
             ? "grid grid-cols-1 items-stretch lg:grid-cols-2"
             : "flex flex-col justify-end",
@@ -53,7 +53,8 @@ export function HeroSection({
       >
         <div
           className={cn(
-            "hero-copy relative z-10 flex items-end self-stretch py-4 lg:pb-[clamp(2rem,7vh,5rem)] lg:pt-[12vh]",
+            "hero-copy relative z-10 flex items-end self-stretch py-4",
+            hasImage && "lg:pb-[clamp(2rem,7vh,5rem)] lg:pt-[12vh]",
             !hasImage && "justify-start",
           )}
         >
