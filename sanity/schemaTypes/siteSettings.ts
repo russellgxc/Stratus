@@ -1,7 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-import { LOREM_MEDIUM } from "../defaults";
-
 const footerLinkFields = [
   defineField({
     name: "label",
@@ -14,7 +12,7 @@ const footerLinkFields = [
     title: "URL",
     type: "string",
     description:
-      "Internal path (e.g. /about, /#industries) or full URL / mailto:",
+      "Internal path (e.g. /about, /industries) or full URL / mailto:",
     validation: (rule) => rule.required(),
   }),
   defineField({
@@ -50,28 +48,27 @@ export const siteSettingsType = defineType({
       title: "Subscribe headline",
       type: "string",
       group: "subscribe",
-      initialValue: "Lorem ipsum dolor sit amet",
+      initialValue: "Stay ahead of the narrative.",
     }),
     defineField({
       name: "subscribeBody",
       title: "Subscribe body",
-      type: "text",
-      rows: 2,
+      type: "blockContent",
       group: "subscribe",
-      initialValue: LOREM_MEDIUM,
     }),
     defineField({
       name: "footerCompanyLinks",
       title: "Company links",
       type: "array",
       group: "footer",
+      description: "Matches the live website footer Company column.",
       of: [footerLinkMember],
       initialValue: [
         { _type: "footerLink", label: "About us", href: "/about", external: false },
         {
           _type: "footerLink",
           label: "Industries",
-          href: "/#industries",
+          href: "/industries",
           external: false,
         },
         {
@@ -93,6 +90,7 @@ export const siteSettingsType = defineType({
       title: "Resource links",
       type: "array",
       group: "footer",
+      description: "Matches the live website footer Resources column.",
       of: [footerLinkMember],
       initialValue: [
         {
@@ -103,14 +101,26 @@ export const siteSettingsType = defineType({
         },
         {
           _type: "footerLink",
-          label: "Pop & Politics",
-          href: "/insight?category=pop-politics",
+          label: "News",
+          href: "/insight?category=news",
           external: false,
         },
         {
           _type: "footerLink",
-          label: "Industry Alerts",
-          href: "/insight?category=industry-alerts",
+          label: "Nuclear & Infrastructure",
+          href: "/insight?category=nuclear-infrastructure",
+          external: false,
+        },
+        {
+          _type: "footerLink",
+          label: "Science & Tech",
+          href: "/insight?category=science-tech",
+          external: false,
+        },
+        {
+          _type: "footerLink",
+          label: "Community & Culture",
+          href: "/insight?category=community-culture",
           external: false,
         },
       ],
@@ -120,6 +130,7 @@ export const siteSettingsType = defineType({
       title: "Social links",
       type: "array",
       group: "footer",
+      description: "Matches the live website footer Social column.",
       of: [footerLinkMember],
       initialValue: [
         {

@@ -1,24 +1,24 @@
 export const insightCategories = [
-  "Pop & Politics",
-  "Industry Alerts",
   "News",
-  "Environment",
+  "Nuclear & Infrastructure",
+  "Science & Tech",
+  "Community & Culture",
 ] as const;
 
 export type InsightCategory = (typeof insightCategories)[number];
 
 export const insightCategoryDotClass: Record<InsightCategory, string> = {
-  "Pop & Politics": "bg-brand-gold",
-  "Industry Alerts": "bg-brand-blue",
   News: "bg-brand-black",
-  Environment: "bg-brand-green",
+  "Nuclear & Infrastructure": "bg-brand-blue",
+  "Science & Tech": "bg-brand-gold",
+  "Community & Culture": "bg-brand-green",
 };
 
 export const insightCategorySlug: Record<InsightCategory, string> = {
-  "Pop & Politics": "pop-politics",
-  "Industry Alerts": "industry-alerts",
   News: "news",
-  Environment: "environment",
+  "Nuclear & Infrastructure": "nuclear-infrastructure",
+  "Science & Tech": "science-tech",
+  "Community & Culture": "community-culture",
 };
 
 export function insightCategoryFromSlug(
@@ -43,7 +43,7 @@ export const insights: InsightItem[] = [
   {
     id: "trust",
     title: "Trust looks solid until the moment it quietly collapses",
-    category: "Pop & Politics",
+    category: "Community & Culture",
     href: "/insight/trust-lagging-indicator",
     image: "/insight-1.png",
     imageAlt: "Professionals in conversation at an event",
@@ -51,7 +51,7 @@ export const insights: InsightItem[] = [
   {
     id: "syria",
     title: "Aid still collides with conflict inside Syria's humanitarian paradox",
-    category: "Environment",
+    category: "News",
     href: "/insight/humanitarian-paradox-syria",
     image: "/insight-2.png",
     imageAlt: "Hillside cityscape at dusk",
@@ -59,7 +59,7 @@ export const insights: InsightItem[] = [
   {
     id: "france-nuclear",
     title: "France is shutting more nuclear plants as heat rises",
-    category: "Industry Alerts",
+    category: "Nuclear & Infrastructure",
     href: "/insight/france-nuclear-heat",
     image: "/insight-3.png",
     imageAlt: "Industrial steam rising against the sky",
@@ -67,7 +67,7 @@ export const insights: InsightItem[] = [
   {
     id: "syria-b",
     title: "Aid still collides with conflict inside Syria's humanitarian paradox",
-    category: "Environment",
+    category: "News",
     href: "/insight/humanitarian-paradox-syria",
     image: "/insight-4.png",
     imageAlt: "Wind turbines on a coastal ridge",
@@ -75,7 +75,7 @@ export const insights: InsightItem[] = [
   {
     id: "ed-sheeran",
     title: "Ed Sheeran inspires new government-backed music in libraries scheme",
-    category: "Pop & Politics",
+    category: "Community & Culture",
     href: "/insight/music-in-libraries",
     image: "/insight-ed-sheeran.jpg",
     imageAlt: "Portrait of a man outdoors",
@@ -83,7 +83,7 @@ export const insights: InsightItem[] = [
   {
     id: "france-nuclear-b",
     title: "Cities feel the heat as nuclear plants go offline",
-    category: "News",
+    category: "Science & Tech",
     href: "/insight/france-nuclear-heat",
     image: "/insight-6.png",
     imageAlt: "City skyline at sunset",

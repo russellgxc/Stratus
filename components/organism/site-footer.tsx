@@ -12,15 +12,23 @@ export type FooterLinkItem = {
 
 const defaultCompanyLinks: FooterLinkItem[] = [
   { href: "/about", label: "About us" },
-  { href: "/#industries", label: "Industries" },
+  { href: "/industries", label: "Industries" },
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ];
 
 const defaultResourceLinks: FooterLinkItem[] = [
   { href: "/insight", label: "Insights" },
-  { href: "/insight?category=pop-politics", label: "Pop & Politics" },
-  { href: "/insight?category=industry-alerts", label: "Industry Alerts" },
+  { href: "/insight?category=news", label: "News" },
+  {
+    href: "/insight?category=nuclear-infrastructure",
+    label: "Nuclear & Infrastructure",
+  },
+  { href: "/insight?category=science-tech", label: "Science & Tech" },
+  {
+    href: "/insight?category=community-culture",
+    label: "Community & Culture",
+  },
 ];
 
 const defaultSocialLinks: FooterLinkItem[] = [

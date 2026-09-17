@@ -26,10 +26,13 @@ export const insightType = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Pop & Politics", value: "Pop & Politics" },
-          { title: "Industry Alerts", value: "Industry Alerts" },
           { title: "News", value: "News" },
-          { title: "Environment", value: "Environment" },
+          {
+            title: "Nuclear & Infrastructure",
+            value: "Nuclear & Infrastructure",
+          },
+          { title: "Science & Tech", value: "Science & Tech" },
+          { title: "Community & Culture", value: "Community & Culture" },
         ],
         layout: "radio",
       },

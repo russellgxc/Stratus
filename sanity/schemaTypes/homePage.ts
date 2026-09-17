@@ -5,10 +5,6 @@ import {
   HERO_CTA_LABEL_MAX,
   HERO_HEADING_COPY,
   HERO_HEADING_MAX,
-  LOREM_ACCORDION,
-  LOREM_LONG,
-  LOREM_MEDIUM,
-  LOREM_SECTOR_CARDS,
   LOREM_SHORT,
 } from "../defaults";
 
@@ -27,7 +23,7 @@ export const homePageType = defineType({
     { name: "hero", title: "Hero", default: true },
     { name: "about", title: "About Section" },
     { name: "industries", title: "Industries Section" },
-    { name: "insight", title: "Insight Section" },
+    { name: "insight", title: "Counsel Section" },
   ],
   fields: [
     defineField({
@@ -79,10 +75,8 @@ export const homePageType = defineType({
     defineField({
       name: "aboutIntroBody",
       title: "Intro body",
-      type: "text",
-      rows: 4,
+      type: "blockContent",
       group: "about",
-      initialValue: LOREM_LONG,
     }),
     defineField({
       name: "aboutImage",
@@ -104,7 +98,6 @@ export const homePageType = defineType({
       title: "Accordion items",
       type: "array",
       group: "about",
-      initialValue: [...LOREM_ACCORDION],
       of: [
         {
           type: "object",
@@ -121,9 +114,7 @@ export const homePageType = defineType({
             defineField({
               name: "content",
               title: "Content",
-              type: "text",
-              rows: 4,
-              initialValue: LOREM_LONG,
+              type: "blockContent",
             }),
           ],
           preview: {
@@ -143,17 +134,14 @@ export const homePageType = defineType({
     defineField({
       name: "sectorsIntro",
       title: "Intro text",
-      type: "text",
-      rows: 2,
+      type: "blockContent",
       group: "industries",
-      initialValue: LOREM_SHORT,
     }),
     defineField({
       name: "sectorsCards",
       title: "Industry cards",
       type: "array",
       group: "industries",
-      initialValue: [...LOREM_SECTOR_CARDS],
       of: [
         {
           type: "object",
@@ -170,9 +158,7 @@ export const homePageType = defineType({
             defineField({
               name: "description",
               title: "Description",
-              type: "text",
-              rows: 3,
-              initialValue: LOREM_MEDIUM,
+              type: "blockContent",
             }),
             defineField({
               name: "image",
@@ -202,22 +188,61 @@ export const homePageType = defineType({
       title: "Section heading",
       type: "string",
       group: "insight",
-      initialValue: "insight",
+      initialValue: "strategic counsel for consequential moments.",
+    }),
+    defineField({
+      name: "insightIntroTitle",
+      title: "Intro title",
+      type: "text",
+      rows: 2,
+      group: "insight",
+      initialValue:
+        "lorem ipsum dolor sit amet consectetur adipiscing elit veniam cillum.",
     }),
     defineField({
       name: "insightIntro",
-      title: "Intro text",
-      type: "text",
-      rows: 3,
+      title: "Intro body",
+      type: "blockContent",
       group: "insight",
-      initialValue: LOREM_MEDIUM,
     }),
     defineField({
       name: "insightCtaLabel",
       title: "Link label",
       type: "string",
       group: "insight",
-      initialValue: "View all",
+      initialValue: "Here's how we help",
+    }),
+    defineField({
+      name: "insightAccordion",
+      title: "Accordion items",
+      description:
+        "Expandable items on the right side of the strategic counsel section.",
+      type: "array",
+      group: "insight",
+      of: [
+        {
+          type: "object",
+          name: "insightAccordionItem",
+          title: "Accordion item",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+              validation: (rule) => rule.required(),
+              initialValue: "Lorem ipsum",
+            }),
+            defineField({
+              name: "content",
+              title: "Content",
+              type: "blockContent",
+            }),
+          ],
+          preview: {
+            select: { title: "title" },
+          },
+        },
+      ],
     }),
   ],
   preview: {

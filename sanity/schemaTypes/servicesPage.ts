@@ -1,11 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-import {
-  LOREM_LONG,
-  LOREM_MEDIUM,
-  LOREM_SERVICE_SECTIONS,
-  LOREM_SHORT,
-} from "../defaults";
+import { LOREM_MEDIUM, LOREM_SHORT } from "../defaults";
 
 export const servicesPageType = defineType({
   name: "servicesPage",
@@ -24,7 +19,6 @@ export const servicesPageType = defineType({
       name: "sections",
       title: "Service sections",
       type: "array",
-      initialValue: [...LOREM_SERVICE_SECTIONS],
       of: [
         {
           type: "object",
@@ -41,9 +35,7 @@ export const servicesPageType = defineType({
             defineField({
               name: "description",
               title: "Description",
-              type: "text",
-              rows: 4,
-              initialValue: LOREM_LONG,
+              type: "blockContent",
             }),
             defineField({
               name: "image",

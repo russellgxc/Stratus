@@ -1,5 +1,6 @@
 import type { PortableTextBlock } from "@portabletext/types";
 
+import { portableTextToPlain } from "@/lib/portable-text";
 import {
   insightCategories,
   insights as fallbackInsights,
@@ -62,23 +63,25 @@ type SanityHomePageRaw = {
   heroImageAlt?: string;
   aboutHeading?: string;
   aboutIntroTitle?: string;
-  aboutIntroBody?: string;
+  aboutIntroBody?: unknown;
   aboutImage?: unknown;
   aboutImageAlt?: string;
   aboutCtaLabel?: string;
-  aboutAccordion?: Array<{ title?: string; content?: string }>;
+  aboutAccordion?: Array<{ title?: string; content?: unknown }>;
   sectorsHeading?: string;
-  sectorsIntro?: string;
+  sectorsIntro?: unknown;
   sectorsCards?: Array<{
     title?: string;
-    description?: string;
+    description?: unknown;
     image?: unknown;
     imageAlt?: string;
   }>;
   sectorsCtaLabel?: string;
   insightHeading?: string;
-  insightIntro?: string;
+  insightIntroTitle?: string;
+  insightIntro?: unknown;
   insightCtaLabel?: string;
+  insightAccordion?: Array<{ title?: string; content?: unknown }>;
 };
 
 type LegacySiteSettingsHero = {
@@ -110,8 +113,10 @@ export type SanityHomePage = {
   }>;
   sectorsCtaLabel?: string;
   insightHeading?: string;
+  insightIntroTitle?: string;
   insightIntro?: string;
   insightCtaLabel?: string;
+  insightAccordion?: Array<{ title: string; content: string }>;
 };
 
 const HOME_PAGE_DEFAULTS: Required<
@@ -130,8 +135,10 @@ const HOME_PAGE_DEFAULTS: Required<
     | "sectorsIntro"
     | "sectorsCtaLabel"
     | "insightHeading"
+    | "insightIntroTitle"
     | "insightIntro"
     | "insightCtaLabel"
+    | "insightAccordion"
   >
 > = {
   heroHeading: HERO_HEADING_COPY,
@@ -150,9 +157,16 @@ const HOME_PAGE_DEFAULTS: Required<
   sectorsHeading: "industries",
   sectorsIntro: LOREM_SHORT,
   sectorsCtaLabel: "See Our Services",
-  insightHeading: "insight",
+  insightHeading: "strategic counsel for consequential moments.",
+  insightIntroTitle:
+    "lorem ipsum dolor sit amet consectetur adipiscing elit veniam cillum.",
   insightIntro: LOREM_MEDIUM,
-  insightCtaLabel: "View all",
+  insightCtaLabel: "Here's how we help",
+  insightAccordion: [
+    { title: "Lorem ipsum", content: LOREM_LONG },
+    { title: "Lorem ipsum", content: LOREM_LONG },
+    { title: "Lorem ipsum", content: LOREM_LONG },
+  ],
 };
 
 function mapHomePage(
@@ -172,11 +186,31 @@ function mapHomePage(
 
   const aboutAccordion =
     home?.aboutAccordion
-      ?.filter((item) => item.title && item.content)
-      .map((item) => ({
-        title: item.title!,
-        content: item.content!,
-      })) ?? [];
+      ?.map((item) => {
+        const content = portableTextToPlain(item.content);
+        if (!item.title || !content) return null;
+        return {
+          title: item.title,
+          content,
+        };
+      })
+      .filter((item): item is { title: string; content: string } =>
+        Boolean(item),
+      ) ?? [];
+
+  const insightAccordion =
+    home?.insightAccordion
+      ?.map((item) => {
+        const content = portableTextToPlain(item.content);
+        if (!item.title || !content) return null;
+        return {
+          title: item.title,
+          content,
+        };
+      })
+      .filter((item): item is { title: string; content: string } =>
+        Boolean(item),
+      ) ?? [];
 
   const sectorsCards =
     home?.sectorsCards
@@ -185,7 +219,7 @@ function mapHomePage(
         const image = urlForImageWithRevision(card.image) || undefined;
         return {
           title: card.title!,
-          description: card.description ?? "",
+          description: portableTextToPlain(card.description),
           image,
           imageAlt: card.imageAlt ?? card.title!,
         };
@@ -208,7 +242,7 @@ function mapHomePage(
     aboutHeading: home?.aboutHeading ?? HOME_PAGE_DEFAULTS.aboutHeading,
     aboutIntroTitle:
       home?.aboutIntroTitle ?? HOME_PAGE_DEFAULTS.aboutIntroTitle,
-    aboutIntroBody: home?.aboutIntroBody ?? "",
+    aboutIntroBody: portableTextToPlain(home?.aboutIntroBody),
     aboutImageUrl: urlForImageWithRevision(home?.aboutImage) || undefined,
     aboutImageAlt: home?.aboutImageAlt ?? HOME_PAGE_DEFAULTS.aboutImageAlt,
     aboutCtaLabel: home?.aboutCtaLabel ?? HOME_PAGE_DEFAULTS.aboutCtaLabel,
@@ -216,14 +250,19 @@ function mapHomePage(
       ? aboutAccordion
       : HOME_PAGE_DEFAULTS.aboutAccordion,
     sectorsHeading: home?.sectorsHeading ?? HOME_PAGE_DEFAULTS.sectorsHeading,
-    sectorsIntro: home?.sectorsIntro ?? "",
+    sectorsIntro: portableTextToPlain(home?.sectorsIntro),
     sectorsCards: sectorsCards.length ? sectorsCards : undefined,
     sectorsCtaLabel:
       home?.sectorsCtaLabel ?? HOME_PAGE_DEFAULTS.sectorsCtaLabel,
     insightHeading: home?.insightHeading ?? HOME_PAGE_DEFAULTS.insightHeading,
-    insightIntro: home?.insightIntro ?? "",
+    insightIntroTitle:
+      home?.insightIntroTitle ?? HOME_PAGE_DEFAULTS.insightIntroTitle,
+    insightIntro: portableTextToPlain(home?.insightIntro),
     insightCtaLabel:
       home?.insightCtaLabel ?? HOME_PAGE_DEFAULTS.insightCtaLabel,
+    insightAccordion: insightAccordion.length
+      ? insightAccordion
+      : HOME_PAGE_DEFAULTS.insightAccordion,
   };
 }
 
@@ -378,7 +417,13 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
   if (!client) return null;
 
   try {
-    return await client.fetch<SanitySiteSettings | null>(
+    const doc = await client.fetch<{
+      subscribeHeadline?: string;
+      subscribeBody?: unknown;
+      footerCompanyLinks?: SanityFooterLink[];
+      footerResourceLinks?: SanityFooterLink[];
+      footerSocialLinks?: SanityFooterLink[];
+    } | null>(
       `*[_id == "siteSettings"][0]{
         subscribeHeadline,
         subscribeBody,
@@ -389,6 +434,16 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
       {},
       fetchOptions,
     );
+
+    if (!doc) return null;
+
+    return {
+      subscribeHeadline: doc.subscribeHeadline,
+      subscribeBody: portableTextToPlain(doc.subscribeBody),
+      footerCompanyLinks: doc.footerCompanyLinks,
+      footerResourceLinks: doc.footerResourceLinks,
+      footerSocialLinks: doc.footerSocialLinks,
+    };
   } catch {
     return null;
   }
@@ -422,8 +477,10 @@ export async function getHomePage(): Promise<SanityHomePage> {
           },
           sectorsCtaLabel,
           insightHeading,
+          insightIntroTitle,
           insightIntro,
-          insightCtaLabel
+          insightCtaLabel,
+          insightAccordion[]{ title, content }
         }`,
         {},
         fetchOptions,
@@ -463,7 +520,19 @@ export type SanityAboutPage = {
 export async function getAboutPage(): Promise<SanityAboutPage | null> {
   if (!client) return null;
   try {
-    return await client.fetch<SanityAboutPage | null>(
+    const doc = await client.fetch<{
+      introHeading?: string;
+      introBody?: unknown;
+      introImage?: unknown;
+      introImageAlt?: string;
+      founderName?: string;
+      founderBio?: unknown;
+      founderImage?: unknown;
+      founderImageAlt?: string;
+      storyHeading?: string;
+      storyBody?: PortableTextBlock[];
+      missionStatement?: unknown;
+    } | null>(
       `*[_id == "aboutPage"][0]{
         introHeading,
         introBody,
@@ -480,6 +549,22 @@ export async function getAboutPage(): Promise<SanityAboutPage | null> {
       {},
       fetchOptions,
     );
+
+    if (!doc) return null;
+
+    return {
+      introHeading: doc.introHeading,
+      introBody: portableTextToPlain(doc.introBody),
+      introImage: doc.introImage,
+      introImageAlt: doc.introImageAlt,
+      founderName: doc.founderName,
+      founderBio: portableTextToPlain(doc.founderBio),
+      founderImage: doc.founderImage,
+      founderImageAlt: doc.founderImageAlt,
+      storyHeading: doc.storyHeading,
+      storyBody: doc.storyBody,
+      missionStatement: portableTextToPlain(doc.missionStatement),
+    };
   } catch {
     return null;
   }
@@ -499,7 +584,16 @@ export type SanityContactPage = {
 export async function getContactPage(): Promise<SanityContactPage | null> {
   if (!client) return null;
   try {
-    return await client.fetch<SanityContactPage | null>(
+    const doc = await client.fetch<{
+      heading?: string;
+      body?: unknown;
+      cardLabel?: string;
+      cardTitle?: string;
+      officeName?: string;
+      officeAddress?: string;
+      email?: string;
+      phone?: string;
+    } | null>(
       `*[_id == "contactPage"][0]{
         heading,
         body,
@@ -513,6 +607,13 @@ export async function getContactPage(): Promise<SanityContactPage | null> {
       {},
       fetchOptions,
     );
+
+    if (!doc) return null;
+
+    return {
+      ...doc,
+      body: portableTextToPlain(doc.body),
+    };
   } catch {
     return null;
   }
@@ -533,7 +634,15 @@ export type SanityServicesPage = {
 export async function getServicesPage(): Promise<SanityServicesPage | null> {
   if (!client) return null;
   try {
-    return await client.fetch<SanityServicesPage | null>(
+    const doc = await client.fetch<{
+      headerDescription?: string;
+      sections?: Array<{
+        title?: string;
+        description?: unknown;
+        image?: unknown;
+        imageAlt?: string;
+      }>;
+    } | null>(
       `*[_id == "servicesPage"][0]{
         headerDescription,
         sections[]{
@@ -542,6 +651,37 @@ export async function getServicesPage(): Promise<SanityServicesPage | null> {
           image,
           "imageAlt": coalesce(image.alt, title)
         }
+      }`,
+      {},
+      fetchOptions,
+    );
+
+    if (!doc) return null;
+
+    return {
+      headerDescription: doc.headerDescription,
+      sections: doc.sections?.map((section) => ({
+        title: section.title,
+        description: portableTextToPlain(section.description),
+        image: section.image,
+        imageAlt: section.imageAlt,
+      })),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export type SanityIndustriesPage = {
+  headerDescription?: string;
+};
+
+export async function getIndustriesPage(): Promise<SanityIndustriesPage | null> {
+  if (!client) return null;
+  try {
+    return await client.fetch<SanityIndustriesPage | null>(
+      `*[_id == "industriesPage"][0]{
+        headerDescription
       }`,
       {},
       fetchOptions,

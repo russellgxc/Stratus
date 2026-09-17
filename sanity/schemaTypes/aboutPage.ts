@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-import { LOREM_LONG, LOREM_MEDIUM, LOREM_SHORT } from "../defaults";
+import { LOREM_SHORT } from "../defaults";
 
 export const aboutPageType = defineType({
   name: "aboutPage",
@@ -19,9 +19,7 @@ export const aboutPageType = defineType({
     defineField({
       name: "introBody",
       title: "Intro body",
-      type: "text",
-      rows: 3,
-      initialValue: LOREM_MEDIUM,
+      type: "blockContent",
     }),
     defineField({
       name: "introImage",
@@ -46,9 +44,7 @@ export const aboutPageType = defineType({
     defineField({
       name: "founderBio",
       title: "Founder short bio",
-      type: "text",
-      rows: 2,
-      initialValue: LOREM_SHORT,
+      type: "blockContent",
     }),
     defineField({
       name: "founderImage",
@@ -75,17 +71,13 @@ export const aboutPageType = defineType({
     defineField({
       name: "storyBody",
       title: "Story section body",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "blockContent",
     }),
     defineField({
       name: "missionStatement",
       title: "Mission statement",
-      type: "text",
-      rows: 3,
+      type: "blockContent",
       description: 'Shown on the "Our Mission" card.',
-      initialValue:
-        "To help organizations navigate complexity and strengthen reputation.",
     }),
   ],
   preview: {

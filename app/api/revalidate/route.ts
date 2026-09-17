@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
   revalidatePath("/about");
   revalidatePath("/contact");
   revalidatePath("/services");
+  revalidatePath("/industries");
 
   if (body.slug?.current) {
     revalidatePath(`/insight/${body.slug.current}`);

@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 
-import { LOREM_MEDIUM, LOREM_SHORT } from "../defaults";
+import { LOREM_SHORT } from "../defaults";
 
 export const contactPageType = defineType({
   name: "contactPage",
@@ -19,10 +19,8 @@ export const contactPageType = defineType({
     defineField({
       name: "body",
       title: "Body text",
-      type: "text",
-      rows: 3,
-      description: "Short paragraph below the heading.",
-      initialValue: LOREM_MEDIUM,
+      type: "blockContent",
+      description: "Paragraph below the heading.",
     }),
     defineField({
       name: "cardLabel",

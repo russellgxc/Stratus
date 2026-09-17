@@ -69,10 +69,8 @@ export function InsightsLandingContent({
                     aria-hidden
                     className={cn(
                       "relative -top-[3px] size-[14.57px] shrink-0 rounded-full",
-                      filter.id === "Environment" && "bg-brand-green",
-                      filter.id === "Pop & Politics" && "bg-brand-gold",
-                      filter.id === "Industry Alerts" && "bg-brand-blue",
-                      filter.id === "News" && "bg-brand-black",
+                      filter.id !== "all" &&
+                        insightCategoryDotClass[filter.id as InsightCategory],
                     )}
                   />
                 ) : null}

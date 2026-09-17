@@ -1,13 +1,13 @@
 import { AboutSection } from "@/components/organism/about-section";
+import { CounselSection } from "@/components/organism/counsel-section";
 import { HeroSection } from "@/components/organism/hero-section";
-import { InsightSection } from "@/components/organism/insight-section";
 import { PracticesSection } from "@/components/organism/practices-section";
-import { getHomePage, getInsights } from "@/sanity/queries";
+import { getHomePage } from "@/sanity/queries";
 
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const [items, home] = await Promise.all([getInsights(), getHomePage()]);
+  const home = await getHomePage();
 
   return (
     <main>
@@ -32,11 +32,12 @@ export default async function HomePage() {
         cards={home?.sectorsCards}
         ctaLabel={home?.sectorsCtaLabel}
       />
-      <InsightSection
-        items={items.slice(0, 4)}
+      <CounselSection
         heading={home?.insightHeading}
-        intro={home?.insightIntro}
+        introTitle={home?.insightIntroTitle}
+        introBody={home?.insightIntro}
         ctaLabel={home?.insightCtaLabel}
+        accordionItems={home?.insightAccordion}
       />
     </main>
   );
