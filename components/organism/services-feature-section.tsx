@@ -1,0 +1,99 @@
+import { FadeIn } from "@/components/ui/fade-in";
+import { Container } from "@/components/ui/container";
+import { TextLink } from "@/components/ui/text-link";
+import { Typography } from "@/components/ui/typography";
+import { SanityPortableText } from "@/components/ui/sanity-portable-text";
+import type { PortableTextBlock } from "@portabletext/types";
+
+const DEFAULT_INTRO =
+  "Organizations need more than visibility. They need to be understood. Stratus helps organizations define and communicate what they stand for, what they are doing and why it matters.";
+
+type ServicesFeatureSectionProps = {
+  heading?: string;
+  intro?: string;
+  body?: PortableTextBlock[] | null;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+/**
+ * Services feature block — Figma 424:432 (title with description)
+ */
+export function ServicesFeatureSection({
+  heading = "Building Awareness",
+  intro = DEFAULT_INTRO,
+  body = null,
+  ctaLabel = "Get Started",
+  ctaHref = "/contact",
+}: ServicesFeatureSectionProps) {
+  return (
+    <section
+      className="bg-brand-white pb-[102px] pt-[50px] md:pb-[134px] md:pt-[99px]"
+      aria-labelledby="services-feature-heading"
+    >
+      <Container>
+        <FadeIn className="rounded bg-brand-muted px-6 py-12 md:px-12 md:py-[50px] lg:px-[72px]">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[33px]">
+            <Typography
+              as="h2"
+              variant="h1"
+              id="services-feature-heading"
+              className="w-full max-w-[35rem] shrink-0 text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:w-[min(39%,35rem)] lg:text-[60px] lg:leading-[60px]"
+            >
+              {heading}
+            </Typography>
+
+            <div className="flex min-w-0 flex-1 flex-col gap-[33px]">
+              <Typography
+                variant="p2"
+                className="text-[clamp(1.375rem,2.5vw,1.875rem)] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black"
+              >
+                {intro}
+              </Typography>
+
+              {body?.length ? (
+                <SanityPortableText value={body} className="gap-5" />
+              ) : (
+                <div className="flex flex-col gap-5 font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
+                  <p>
+                    <strong className="font-semibold">Strategic Positioning</strong>{" "}
+                    Clarifying how an organization, initiative or idea should be
+                    understood and differentiated.{" "}
+                    <strong className="font-semibold">Narrative Development</strong>{" "}
+                    Creating clear, credible narratives that connect an
+                    organization&apos;s work with the interests and expectations of
+                    the people who matter.{" "}
+                    <strong className="font-semibold">
+                      Strategic Communications
+                    </strong>{" "}
+                    Developing communications strategies that connect
+                    organizational priorities with the audiences they need to
+                    reach.
+                  </p>
+                  <p>
+                    <strong className="font-semibold">Thought Leadership</strong>{" "}
+                    Helping leaders and organizations contribute meaningfully to
+                    the conversations shaping their industries and communities.{" "}
+                    <strong className="font-semibold">
+                      Executive Communications
+                    </strong>{" "}
+                    Helping leaders communicate with clarity, credibility and
+                    purpose when their voice matters most.
+                  </p>
+                </div>
+              )}
+
+              <TextLink
+                href={ctaHref}
+                arrow={false}
+                className="self-start text-[30px] leading-none tracking-[-0.02em] text-brand-black hover:text-brand-black"
+              >
+                {ctaLabel}
+              </TextLink>
+            </div>
+          </div>
+        </FadeIn>
+      </Container>
+    </section>
+  );
+}

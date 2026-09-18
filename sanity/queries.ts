@@ -619,16 +619,13 @@ export async function getContactPage(): Promise<SanityContactPage | null> {
   }
 }
 
-export type SanityServiceSection = {
-  title?: string;
-  description?: string;
-  image?: unknown;
-  imageAlt?: string;
-};
-
 export type SanityServicesPage = {
   headerDescription?: string;
-  sections?: SanityServiceSection[];
+  featureHeading?: string;
+  featureIntro?: string;
+  featureBody?: PortableTextBlock[];
+  featureCtaLabel?: string;
+  featureCtaHref?: string;
 };
 
 export async function getServicesPage(): Promise<SanityServicesPage | null> {
@@ -636,21 +633,19 @@ export async function getServicesPage(): Promise<SanityServicesPage | null> {
   try {
     const doc = await client.fetch<{
       headerDescription?: string;
-      sections?: Array<{
-        title?: string;
-        description?: unknown;
-        image?: unknown;
-        imageAlt?: string;
-      }>;
+      featureHeading?: string;
+      featureIntro?: string;
+      featureBody?: PortableTextBlock[];
+      featureCtaLabel?: string;
+      featureCtaHref?: string;
     } | null>(
       `*[_id == "servicesPage"][0]{
         headerDescription,
-        sections[]{
-          title,
-          description,
-          image,
-          "imageAlt": coalesce(image.alt, title)
-        }
+        featureHeading,
+        featureIntro,
+        featureBody,
+        featureCtaLabel,
+        featureCtaHref
       }`,
       {},
       fetchOptions,
@@ -659,13 +654,12 @@ export async function getServicesPage(): Promise<SanityServicesPage | null> {
     if (!doc) return null;
 
     return {
-      headerDescription: doc.headerDescription,
-      sections: doc.sections?.map((section) => ({
-        title: section.title,
-        description: portableTextToPlain(section.description),
-        image: section.image,
-        imageAlt: section.imageAlt,
-      })),
+      headerDescription: doc.headerDescription || undefined,
+      featureHeading: doc.featureHeading || undefined,
+      featureIntro: doc.featureIntro || undefined,
+      featureBody: doc.featureBody?.length ? doc.featureBody : undefined,
+      featureCtaLabel: doc.featureCtaLabel || undefined,
+      featureCtaHref: doc.featureCtaHref || undefined,
     };
   } catch {
     return null;
