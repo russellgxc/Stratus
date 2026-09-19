@@ -12,7 +12,7 @@ const config: Config = {
       colors: {
         brand: {
           blue: "#0582F4",
-          muted: "#FBFAF5",
+          muted: "#FCF9F1",
           green: "#ACC261",
           gold: "#FAC840",
           black: "#000000",

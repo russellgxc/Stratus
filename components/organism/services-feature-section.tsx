@@ -63,14 +63,29 @@ export function ServicesFeatureSection({
         <FadeIn className="group relative overflow-hidden rounded bg-brand-muted px-6 py-12 md:px-12 md:py-[50px] lg:px-[72px]">
           <CardArcs />
           <div className="relative z-10 flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[33px]">
-            <Typography
-              as="h2"
-              variant="h1"
-              id="services-feature-heading"
-              className="w-full max-w-[35rem] shrink-0 text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:w-[min(39%,35rem)] lg:text-[60px] lg:leading-[60px]"
-            >
-              {heading}
-            </Typography>
+            <div className="flex w-full max-w-[35rem] shrink-0 flex-col gap-4 lg:w-[min(39%,35rem)]">
+              <p className="inline-flex items-center gap-2.5">
+                <span
+                  aria-hidden
+                  className="size-[14px] shrink-0 rounded-full bg-brand-blue"
+                />
+                <Typography
+                  as="span"
+                  variant="p4"
+                  className="text-brand-black"
+                >
+                  Client services
+                </Typography>
+              </p>
+              <Typography
+                as="h2"
+                variant="h1"
+                id="services-feature-heading"
+                className="text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
+              >
+                {heading}
+              </Typography>
+            </div>
 
             <div className="flex min-w-0 flex-1 flex-col gap-[33px]">
               <Typography

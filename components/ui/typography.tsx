@@ -15,6 +15,8 @@ const typographyVariants = {
   /** Contact details / compact emphasis — Figma 24px Inter */
   p2Small:
     "font-sans text-2xl font-normal leading-[1.1] tracking-[-0.02em] text-brand-dark",
+  /** Small label / meta — Figma P4 */
+  p4: "font-sans text-sm font-normal leading-5 tracking-[-0.02em] text-brand-dark",
   body: "font-sans text-lg font-normal leading-[1.5rem] text-brand-dark",
   link: "link-underline font-sans text-base font-normal no-underline transition-colors hover:text-brand-blue",
 } as const;
@@ -41,6 +43,7 @@ const defaultElement: Record<TypographyVariant, TypographyElement> = {
   p1: "p",
   p2: "p",
   p2Small: "p",
+  p4: "p",
   body: "p",
   link: "a",
 };

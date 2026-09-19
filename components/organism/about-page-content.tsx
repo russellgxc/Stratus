@@ -108,7 +108,7 @@ export function AboutPageContent({
       {/* Story / portrait */}
       <section
         id="about-story"
-        className="pt-[100px] lg:pt-[183px]"
+        className="pb-[100px] pt-[100px] lg:pb-[183px] lg:pt-[183px]"
         aria-labelledby="about-story-heading"
       >
         <Container>
@@ -226,7 +226,7 @@ export function AboutPageContent({
 
       {/* Closing feature — Figma 269:747 */}
       <section
-        className="pb-[134px] pt-[100px] lg:pt-[183px]"
+        className="bg-brand-muted pb-[134px] pt-[100px] text-brand-black lg:pt-[183px]"
         aria-labelledby="about-awareness-heading"
       >
         <Container>
@@ -254,8 +254,8 @@ export function AboutPageContent({
                 id="about-awareness-heading"
                 className="max-w-[395px] text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
               >
-                Building Awareness
-              </Typography>
+                  Lorem ipsum dolor
+                </Typography>
 
               <Typography
                 variant="body"
