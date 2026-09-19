@@ -75,7 +75,7 @@ export function InsightCard({
         )}
       />
 
-      <div className="relative z-10 flex w-full flex-col px-[24.5px] pb-[19.6px] pt-[13.3px] md:min-h-0 md:flex-1">
+      <div className="relative z-10 flex w-full flex-col p-[24.5px] md:min-h-0 md:flex-1">
         <span
           aria-hidden
           className={cn(
