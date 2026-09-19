@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const colors = [
   { name: "Blue", token: "brand-blue", hex: "#0582F4", className: "bg-brand-blue", onDark: true },
-  { name: "Muted", token: "brand-muted", hex: "#F9F6F0", className: "bg-brand-muted", onDark: false },
+  { name: "Muted", token: "brand-muted", hex: "#FBFAF5", className: "bg-brand-muted", onDark: false },
   { name: "Green", token: "brand-green", hex: "#ACC261", className: "bg-brand-green", onDark: false },
   { name: "Gold", token: "brand-gold", hex: "#FAC840", className: "bg-brand-gold", onDark: false },
   { name: "Black", token: "brand-black", hex: "#000000", className: "bg-brand-black", onDark: true },

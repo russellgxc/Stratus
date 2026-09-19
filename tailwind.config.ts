@@ -12,7 +12,7 @@ const config: Config = {
       colors: {
         brand: {
           blue: "#0582F4",
-          muted: "#F9F6F0",
+          muted: "#FBFAF5",
           green: "#ACC261",
           gold: "#FAC840",
           black: "#000000",
@@ -23,6 +23,9 @@ const config: Config = {
       fontFamily: {
         serif: ["var(--font-noto-serif)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "sans-serif"],
+      },
+      borderRadius: {
+        DEFAULT: "4px",
       },
     },
   },

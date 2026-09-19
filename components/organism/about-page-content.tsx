@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import type { PortableTextBlock } from "@portabletext/types";
 
 import { FadeIn } from "@/components/ui/fade-in";
-import { HalfPageCard } from "@/components/ui/half-page-card";
 import { Container } from "@/components/ui/container";
 import { SanityPortableText } from "@/components/ui/sanity-portable-text";
 import { Typography } from "@/components/ui/typography";
@@ -18,7 +17,7 @@ import type { SanityAboutPage } from "@/sanity/queries";
  * Intro rail (1440): copy 632 · gap 112 · image 696
  * Story block: image 465 · gap ~104 · copy 586 (inset ~143 from rail)
  * Section stack gap: 183
- * Cards: 710 + 20 · 710
+ * Closing feature: Figma 269:747 (image + text)
  */
 export function AboutPageContent({
   about,
@@ -45,9 +44,6 @@ export function AboutPageContent({
   const storyBody = about?.storyBody?.length
     ? (about.storyBody as PortableTextBlock[])
     : null;
-  const missionStatement =
-    about?.missionStatement ??
-    "To help organizations navigate complexity and strengthen reputation.";
 
   return (
     <div className="bg-brand-white text-brand-black">
@@ -87,7 +83,7 @@ export function AboutPageContent({
                 </span>
                 <ArrowDown
                   aria-hidden
-                  className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
+                  className="size-4 shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
                 />
               </Link>
             </FadeIn>
@@ -220,7 +216,7 @@ export function AboutPageContent({
                 </span>
                 <ArrowDown
                   aria-hidden
-                  className="size-[38px] shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
+                  className="size-4 shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-y-1"
                 />
               </a>
             </FadeIn>
@@ -228,31 +224,58 @@ export function AboutPageContent({
         </Container>
       </section>
 
-      {/* Cards */}
+      {/* Closing feature — Figma 269:747 */}
       <section
         className="pb-[134px] pt-[100px] lg:pt-[183px]"
-        aria-label="Mission and contact"
+        aria-labelledby="about-awareness-heading"
       >
         <Container>
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-5">
-            <FadeIn delay={0}>
-              <HalfPageCard
-                label="Our Mission"
-                title={missionStatement}
-                cta="Download report"
-                href="#"
-                arrow="down"
-                className="lg:max-w-none"
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[72px]">
+            <FadeIn
+              className="relative aspect-[750/524] w-full max-w-[750px] shrink-0 overflow-hidden rounded"
+              delay={0}
+            >
+              <Image
+                src="/about-building-awareness.png"
+                alt="Illustration of people collaborating in a bright office"
+                fill
+                sizes="(max-width: 1024px) 100vw, 750px"
+                className="object-cover"
               />
             </FadeIn>
-            <FadeIn delay={120}>
-              <HalfPageCard
-                label="Connect with us"
-                title={storyHeading}
-                cta="Contact us"
-                href="/contact"
-                className="lg:max-w-none"
-              />
+
+            <FadeIn
+              className="flex w-full max-w-[604px] flex-col gap-[33px]"
+              delay={120}
+            >
+              <Typography
+                as="h2"
+                variant="h1"
+                id="about-awareness-heading"
+                className="max-w-[395px] text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
+              >
+                Building Awareness
+              </Typography>
+
+              <Typography
+                variant="body"
+                className="text-lg font-normal leading-[1.5rem] text-brand-black"
+              >
+                {LOREM_MEDIUM}
+              </Typography>
+
+              <Link
+                href="#about-story"
+                className="group inline-flex items-center gap-3 self-start text-brand-black"
+              >
+                <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
+                  Get Started
+                </span>
+                <ArrowRight
+                  aria-hidden
+                  className="size-4 shrink-0 stroke-[1.5] transition-transform duration-300 ease-in-out motion-safe:group-hover:translate-x-1"
+                />
+              </Link>
             </FadeIn>
           </div>
         </Container>

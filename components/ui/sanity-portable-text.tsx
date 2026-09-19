@@ -87,7 +87,7 @@ const components: PortableTextComponents = {
 
       return (
         <figure className="my-10">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[10px]">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded">
             <Image
               src={src}
               alt={value.alt || ""}

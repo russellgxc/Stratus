@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { TextLink } from "@/components/ui/text-link";
 import { Typography } from "@/components/ui/typography";
 import { SanityPortableText } from "@/components/ui/sanity-portable-text";
+import { cn } from "@/lib/utils";
 import type { PortableTextBlock } from "@portabletext/types";
 
 const DEFAULT_INTRO =
@@ -15,6 +16,33 @@ type ServicesFeatureSectionProps = {
   ctaLabel?: string;
   ctaHref?: string;
 };
+
+function CardArcs() {
+  return (
+    <>
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute -bottom-[190px] -right-[175px] h-[281.5px] w-[422px]",
+          "rounded-tl-[348.66px] bg-black/[0.03] opacity-90",
+          "transition-[transform,background-color,opacity] duration-500 ease-in-out",
+          "motion-safe:group-hover:-translate-x-[30px] motion-safe:group-hover:-translate-y-[29.55px]",
+          "motion-safe:group-hover:bg-black/[0.11] motion-safe:group-hover:opacity-[0.21]",
+        )}
+      />
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute -bottom-[190px] -right-[123px] h-[281.5px] w-[422px]",
+          "rounded-tl-[348.66px] bg-black/[0.05] opacity-90",
+          "transition-[transform,background-color,opacity] duration-500 ease-in-out",
+          "motion-safe:group-hover:-translate-x-[30px] motion-safe:group-hover:-translate-y-[29.55px]",
+          "motion-safe:group-hover:bg-black/[0.11] motion-safe:group-hover:opacity-40",
+        )}
+      />
+    </>
+  );
+}
 
 /**
  * Services feature block — Figma 424:432 (title with description)
@@ -32,8 +60,9 @@ export function ServicesFeatureSection({
       aria-labelledby="services-feature-heading"
     >
       <Container>
-        <FadeIn className="rounded bg-brand-muted px-6 py-12 md:px-12 md:py-[50px] lg:px-[72px]">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[33px]">
+        <FadeIn className="group relative overflow-hidden rounded bg-brand-muted px-6 py-12 md:px-12 md:py-[50px] lg:px-[72px]">
+          <CardArcs />
+          <div className="relative z-10 flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[33px]">
             <Typography
               as="h2"
               variant="h1"
@@ -85,8 +114,8 @@ export function ServicesFeatureSection({
 
               <TextLink
                 href={ctaHref}
-                arrow={false}
-                className="self-start text-[30px] leading-none tracking-[-0.02em] text-brand-black hover:text-brand-black"
+                arrow="right"
+                className="self-start text-2xl leading-[1.85] tracking-[-0.02em] text-brand-black hover:text-brand-black"
               >
                 {ctaLabel}
               </TextLink>

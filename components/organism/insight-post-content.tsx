@@ -93,7 +93,7 @@ export function InsightPostContent({
               </Typography>
             ) : null}
 
-            <div className="relative mt-12 aspect-[16/10] w-full overflow-hidden rounded-[10px]">
+            <div className="relative mt-12 aspect-[16/10] w-full overflow-hidden rounded">
               <Image
                 src={image}
                 alt={imageAlt}
