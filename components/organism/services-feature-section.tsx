@@ -95,6 +95,11 @@ export function ServicesFeatureSection({
                 {intro}
               </Typography>
 
+              <div
+                aria-hidden
+                className="h-0.5 w-full bg-brand-black md:hidden"
+              />
+
               {body?.length ? (
                 <SanityPortableText value={body} className="gap-5" />
               ) : (

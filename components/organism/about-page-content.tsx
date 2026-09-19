@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { Container } from "@/components/ui/container";
 import { SanityPortableText } from "@/components/ui/sanity-portable-text";
 import { Typography } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
 import { LOREM_MEDIUM } from "@/sanity/defaults";
 import { urlForImageWithRevision } from "@/sanity/image";
 import type { SanityAboutPage } from "@/sanity/queries";
@@ -27,13 +28,13 @@ export function AboutPageContent({
   const introHeading =
     about?.introHeading ??
     "we work with organizations whose missions influence how people live.";
-  const introBody = about?.introBody ?? LOREM_MEDIUM;
+  const introBody = (about?.introBody ?? LOREM_MEDIUM).trim();
   const introImage =
     urlForImageWithRevision(about?.introImage) || "/about-illustration.png";
   const introImageAlt =
     about?.introImageAlt ?? "Illustration of people building steps together";
   const founderName = about?.founderName ?? "Monifa Miller";
-  const founderBio = about?.founderBio ?? LOREM_MEDIUM;
+  const founderBio = (about?.founderBio ?? LOREM_MEDIUM).trim();
   const founderImage =
     urlForImageWithRevision(about?.founderImage) || "/about-page-portrait.png";
   const founderImageAlt =
@@ -44,6 +45,7 @@ export function AboutPageContent({
   const storyBody = about?.storyBody?.length
     ? (about.storyBody as PortableTextBlock[])
     : null;
+  const closingBody = LOREM_MEDIUM.trim();
 
   return (
     <div className="bg-brand-white text-brand-black">
@@ -67,16 +69,21 @@ export function AboutPageContent({
                 {introHeading}
               </Typography>
 
-              <Typography
-                variant="body"
-                className="mt-[53px] max-w-[328px] text-lg leading-[1.5rem] text-brand-black"
-              >
-                {introBody}
-              </Typography>
+              {introBody ? (
+                <Typography
+                  variant="body"
+                  className="mt-[53px] max-w-[328px] text-lg leading-[1.5rem] text-brand-black"
+                >
+                  {introBody}
+                </Typography>
+              ) : null}
 
               <Link
                 href="#about-story"
-                className="group mt-[45px] inline-flex items-center gap-3 self-start text-brand-black"
+                className={cn(
+                  "group inline-flex items-center gap-3 self-start text-brand-black",
+                  introBody ? "mt-[45px]" : "mt-[53px]",
+                )}
               >
                 <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
                   Read More
@@ -130,9 +137,11 @@ export function AboutPageContent({
                 <p className="font-sans text-[30px] font-normal leading-[1.1] tracking-[-0.02em] text-brand-black">
                   {founderName}
                 </p>
-                <p className="mt-[10px] max-w-[296px] font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
-                  {founderBio}
-                </p>
+                {founderBio ? (
+                  <p className="mt-[10px] max-w-[296px] font-sans text-lg font-normal leading-[1.5rem] text-brand-black">
+                    {founderBio}
+                  </p>
+                ) : null}
                 <ul className="mt-6 flex flex-col gap-1">
                   <li>
                     <a
@@ -254,15 +263,17 @@ export function AboutPageContent({
                 id="about-awareness-heading"
                 className="max-w-[395px] text-[clamp(2.25rem,5vw,3.75rem)] font-normal leading-none tracking-normal text-brand-black lg:text-[60px] lg:leading-[60px]"
               >
-                  Lorem ipsum dolor
-                </Typography>
-
-              <Typography
-                variant="body"
-                className="text-lg font-normal leading-[1.5rem] text-brand-black"
-              >
-                {LOREM_MEDIUM}
+                Lorem ipsum dolor
               </Typography>
+
+              {closingBody ? (
+                <Typography
+                  variant="body"
+                  className="text-lg font-normal leading-[1.5rem] text-brand-black"
+                >
+                  {closingBody}
+                </Typography>
+              ) : null}
 
               <Link
                 href="#about-story"
