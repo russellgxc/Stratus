@@ -235,7 +235,7 @@ export function AboutPageContent({
 
       {/* Closing feature — Figma 269:747 */}
       <section
-        className="bg-brand-muted pb-[134px] pt-[100px] text-brand-black lg:pt-[183px]"
+        className="border-t border-brand-black/25 pb-[134px] pt-[100px] text-brand-black lg:pt-[183px]"
         aria-labelledby="about-awareness-heading"
       >
         <Container>
