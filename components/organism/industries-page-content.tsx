@@ -55,7 +55,7 @@ export function IndustriesPageContent({
 
   return (
     <section
-      className="bg-brand-white pb-[102px] pt-8 text-brand-black md:pb-[134px] md:pt-12"
+      className="bg-brand-white pb-[102px] pt-[50px] text-brand-black md:pb-[134px] md:pt-[99px]"
       aria-label="Industries"
     >
       <Container>
