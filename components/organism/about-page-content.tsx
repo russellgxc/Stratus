@@ -96,7 +96,7 @@ export function AboutPageContent({
             </FadeIn>
 
             <FadeIn
-              className="relative aspect-[696/486] w-full min-w-0 max-w-[696px] flex-1 overflow-hidden rounded lg:mt-[153px]"
+              className="relative aspect-[696/486] w-full min-w-0 max-w-[696px] flex-1 overflow-hidden rounded"
               delay={120}
             >
               <Image
@@ -235,7 +235,7 @@ export function AboutPageContent({
 
       {/* Closing feature — Figma 269:747 */}
       <section
-        className="border-t border-brand-black/25 pb-[134px] pt-[100px] text-brand-black lg:pt-[183px]"
+        className="bg-brand-muted pb-[134px] pt-[100px] text-brand-black lg:pt-[183px]"
         aria-labelledby="about-awareness-heading"
       >
         <Container>
@@ -276,7 +276,7 @@ export function AboutPageContent({
               ) : null}
 
               <Link
-                href="#about-story"
+                href="/contact"
                 className="group inline-flex items-center gap-3 self-start text-brand-black"
               >
                 <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">

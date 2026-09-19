@@ -20,26 +20,12 @@ const defaultCompanyLinks: FooterLinkItem[] = [
 const defaultResourceLinks: FooterLinkItem[] = [
   { href: "/insight", label: "Insights" },
   { href: "/insight?category=news", label: "News" },
-  {
-    href: "/insight?category=nuclear-infrastructure",
-    label: "Nuclear & Infrastructure",
-  },
-  { href: "/insight?category=science-tech", label: "Science & Tech" },
-  {
-    href: "/insight?category=community-culture",
-    label: "Community & Culture",
-  },
 ];
 
 const defaultSocialLinks: FooterLinkItem[] = [
   {
     href: "https://www.linkedin.com",
     label: "Linkedin",
-    external: true,
-  },
-  {
-    href: "https://www.facebook.com",
-    label: "Facebook",
     external: true,
   },
   {

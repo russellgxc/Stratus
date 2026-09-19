@@ -55,7 +55,7 @@ export function IndustriesPageContent({
 
   return (
     <section
-      className="bg-brand-white pb-[102px] pt-[50px] text-brand-black md:pb-[134px] md:pt-[99px]"
+      className="bg-brand-white pb-[102px] pt-8 text-brand-black md:pb-[134px] md:pt-12"
       aria-label="Industries"
     >
       <Container>
@@ -65,12 +65,14 @@ export function IndustriesPageContent({
             const ctaLabel = item.ctaLabel?.trim() || "Get Started";
             const ctaHref = item.ctaHref?.trim() || "/contact";
             const isLast = index === list.length - 1;
+            const isFirst = index === 0;
 
             return (
               <li
                 key={`${item.title}-${index}`}
                 className={cn(
-                  "py-10 md:py-16 lg:py-[72px]",
+                  "pb-10 pt-10 md:pb-16 md:pt-16 lg:pb-[72px] lg:pt-[72px]",
+                  isFirst && "pt-0 md:pt-0 lg:pt-0",
                   !isLast && "border-b border-brand-black/25",
                 )}
               >

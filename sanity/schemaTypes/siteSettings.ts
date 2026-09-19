@@ -105,24 +105,6 @@ export const siteSettingsType = defineType({
           href: "/insight?category=news",
           external: false,
         },
-        {
-          _type: "footerLink",
-          label: "Nuclear & Infrastructure",
-          href: "/insight?category=nuclear-infrastructure",
-          external: false,
-        },
-        {
-          _type: "footerLink",
-          label: "Science & Tech",
-          href: "/insight?category=science-tech",
-          external: false,
-        },
-        {
-          _type: "footerLink",
-          label: "Community & Culture",
-          href: "/insight?category=community-culture",
-          external: false,
-        },
       ],
     }),
     defineField({
@@ -137,12 +119,6 @@ export const siteSettingsType = defineType({
           _type: "footerLink",
           label: "Linkedin",
           href: "https://www.linkedin.com",
-          external: true,
-        },
-        {
-          _type: "footerLink",
-          label: "Facebook",
-          href: "https://www.facebook.com",
           external: true,
         },
         {
