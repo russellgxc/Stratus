@@ -59,18 +59,22 @@ export function IndustriesPageContent({
       aria-label="Industries"
     >
       <Container>
-        <ul className="flex list-none flex-col gap-10 p-0 md:gap-16 lg:gap-[72px]">
+        <ul className="flex list-none flex-col p-0">
           {list.map((item, index) => {
             const body = item.body?.trim() ?? "";
             const ctaLabel = item.ctaLabel?.trim() || "Get Started";
             const ctaHref = item.ctaHref?.trim() || "/contact";
+            const isLast = index === list.length - 1;
 
             return (
-              <li key={`${item.title}-${index}`}>
-                <FadeIn
-                  delay={index * 80}
-                  className="overflow-hidden rounded bg-brand-muted px-6 py-10 md:px-12 md:py-12 lg:px-[72px] lg:py-[50px]"
-                >
+              <li
+                key={`${item.title}-${index}`}
+                className={cn(
+                  "py-10 md:py-16 lg:py-[72px]",
+                  !isLast && "border-b border-brand-black/10",
+                )}
+              >
+                <FadeIn delay={index * 80}>
                   <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[72px]">
                     <div className="relative aspect-[750/524] w-full max-w-[750px] shrink-0 overflow-hidden rounded">
                       <Image
@@ -102,9 +106,7 @@ export function IndustriesPageContent({
 
                       <Link
                         href={ctaHref}
-                        className={cn(
-                          "group inline-flex items-center gap-3 self-start text-brand-black",
-                        )}
+                        className="group inline-flex items-center gap-3 self-start text-brand-black"
                       >
                         <span className="link-underline font-sans text-2xl font-normal leading-[44.6px] tracking-[-0.02em]">
                           {ctaLabel}
