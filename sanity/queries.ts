@@ -668,18 +668,64 @@ export async function getServicesPage(): Promise<SanityServicesPage | null> {
 
 export type SanityIndustriesPage = {
   headerDescription?: string;
+  items?: Array<{
+    title: string;
+    body?: string;
+    image?: string;
+    imageAlt?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  }>;
 };
 
 export async function getIndustriesPage(): Promise<SanityIndustriesPage | null> {
   if (!client) return null;
   try {
-    return await client.fetch<SanityIndustriesPage | null>(
+    const doc = await client.fetch<{
+      headerDescription?: string;
+      items?: Array<{
+        title?: string;
+        body?: unknown;
+        image?: unknown;
+        imageAlt?: string;
+        ctaLabel?: string;
+        ctaHref?: string;
+      }>;
+    } | null>(
       `*[_id == "industriesPage"][0]{
-        headerDescription
+        headerDescription,
+        items[]{
+          title,
+          body,
+          image,
+          "imageAlt": coalesce(image.alt, title),
+          ctaLabel,
+          ctaHref
+        }
       }`,
       {},
       fetchOptions,
     );
+
+    if (!doc) return null;
+
+    const items =
+      doc.items
+        ?.filter((item) => Boolean(item.title))
+        .map((item) => ({
+          title: item.title!,
+          body: portableTextToPlain(item.body),
+          image: urlForImageWithRevision(item.image) || undefined,
+          imageAlt: item.imageAlt,
+          ctaLabel: item.ctaLabel,
+          ctaHref: item.ctaHref,
+        }))
+        .filter((item) => Boolean(item.image)) ?? [];
+
+    return {
+      headerDescription: doc.headerDescription,
+      items: items.length ? items : undefined,
+    };
   } catch {
     return null;
   }
