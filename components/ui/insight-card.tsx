@@ -35,14 +35,15 @@ export function InsightCard({
     <Link
       href={href}
       className={cn(
-        "group relative flex h-[550px] w-full flex-col overflow-hidden rounded transition-colors duration-500 ease-in-out",
+        "group relative flex w-full flex-col overflow-hidden rounded transition-colors duration-500 ease-in-out",
+        "h-auto md:h-[550px]",
         variant === "gold"
           ? "bg-brand-gold"
           : "bg-brand-muted hover:bg-brand-gold",
         className,
       )}
     >
-      <div className="relative h-[256px] w-full shrink-0 overflow-hidden rounded-t">
+      <div className="relative aspect-[465/256] h-auto w-full shrink-0 overflow-hidden rounded-t md:aspect-auto md:h-[256px]">
         <Image
           src={image}
           alt={imageAlt}
@@ -74,7 +75,7 @@ export function InsightCard({
         )}
       />
 
-      <div className="relative z-10 flex min-h-0 w-full flex-1 flex-col px-[24.5px] pb-[19.6px] pt-[13.3px]">
+      <div className="relative z-10 flex w-full flex-col px-[24.5px] pb-[19.6px] pt-[13.3px] md:min-h-0 md:flex-1">
         <span
           aria-hidden
           className={cn(
@@ -94,7 +95,7 @@ export function InsightCard({
           </p>
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-4">
+        <div className="mt-6 flex items-center justify-between gap-4 md:mt-auto">
           <span className="link-underline font-sans text-lg font-normal leading-5 text-brand-black">
             Read more
           </span>

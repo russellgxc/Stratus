@@ -85,7 +85,7 @@ export function HalfPageCard({
   const shellClassName = cn(
     "group relative flex min-h-[420px] w-full flex-col overflow-hidden rounded-[10px] transition-colors duration-500 ease-in-out lg:min-h-[582px] lg:max-w-[710px]",
     isContact
-      ? "bg-brand-muted px-[45px] pb-[17px] pt-[39px] text-brand-dark"
+      ? "bg-brand-muted p-9 text-brand-dark"
       : cn(
           "p-[45px]",
           isBlue

@@ -197,7 +197,7 @@ export function Navbar({ className, variant = "default" }: NavbarProps) {
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "link-underline inline-block py-2 font-sans text-[clamp(1.5rem,3vw,2.5rem)] font-normal leading-none tracking-[-0.02em] text-brand-white",
+                        "link-underline inline-block py-2 font-sans text-[clamp(1.95rem,3.9vw,3.25rem)] font-normal leading-none tracking-[-0.02em] text-brand-white",
                         isActive && "link-underline-active",
                       )}
                       onClick={() => setMenuOpen(false)}

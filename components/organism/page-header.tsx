@@ -14,10 +14,15 @@ type PageHeaderProps = {
  * Nav is global/fixed in the root layout.
  */
 export function PageHeader({ title, description, className }: PageHeaderProps) {
+  const hasDescription = Boolean(description?.trim());
+
   return (
     <header
       className={cn(
-        "relative flex min-h-[400px] flex-col overflow-hidden bg-brand-blue text-brand-white",
+        "relative flex flex-col overflow-hidden bg-brand-blue text-brand-white",
+        hasDescription
+          ? "min-h-[400px]"
+          : "min-h-[320px] md:min-h-[400px]",
         className,
       )}
     >
