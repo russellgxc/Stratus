@@ -71,7 +71,7 @@ export function IndustriesPageContent({
                 key={`${item.title}-${index}`}
                 className={cn(
                   "py-10 md:py-16 lg:py-[72px]",
-                  !isLast && "border-b border-brand-black/10",
+                  !isLast && "border-b border-brand-black/25",
                 )}
               >
                 <FadeIn delay={index * 80}>
